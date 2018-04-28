@@ -4,10 +4,38 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Open2FA Watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Open2FA.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>2E0803142090E40000DF30E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2ECC46C12074027300C67388</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2ECC46D92074027400C67388</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2ECC46E42074027400C67388</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

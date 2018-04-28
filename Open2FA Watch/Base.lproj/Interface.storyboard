@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14031"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController">
+                    <items>
+                        <table alignment="left" id="Ydt-zi-xxj">
+                            <items>
+                                <tableRow identifier="tokenRow" id="cyJ-Vm-oSU" customClass="TokenWatchRow">
+                                    <group key="rootItem" width="1" height="34" alignment="left" spacing="5" id="bcB-Zf-dow">
+                                        <items>
+                                            <group width="0.25" alignment="left" verticalAlignment="center" id="E0G-iI-woX">
+                                                <items>
+                                                    <imageView alignment="left" image="DPLogo" id="aX9-rY-amT"/>
+                                                </items>
+                                            </group>
+                                            <group width="0.75" height="1" alignment="center" verticalAlignment="center" layout="vertical" spacing="0.0" id="N9Q-73-5Gp">
+                                                <items>
+                                                    <label height="14" alignment="left" verticalAlignment="center" text="086 682" id="HaR-W1-PGd">
+                                                        <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                    </label>
+                                                    <label alignment="left" verticalAlignment="center" text="E Corp" minimumScaleFactor="0.5" id="Hdz-J7-W5Y">
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="font" type="system" pointSize="11"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                        </items>
+                                        <edgeInsets key="margins" left="10" right="10" top="3" bottom="3"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="imageView" destination="aX9-rY-amT" id="hS1-RP-OYU"/>
+                                        <outlet property="issuerLabel" destination="Hdz-J7-W5Y" id="vUp-Kj-vDW"/>
+                                        <outlet property="tokenLabel" destination="HaR-W1-PGd" id="I0h-rd-2Jp"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="Ydt-zi-xxj" id="Scg-um-UiG"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+</document>
