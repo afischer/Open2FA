@@ -13,6 +13,7 @@
 
 @interface InterfaceController () <WCSessionDelegate>
 @property (strong, nonatomic) IBOutlet WKInterfaceTable *table;
+@property (strong, nonatomic) WCSession *wcSession;
 @end
 
 
@@ -25,12 +26,18 @@
 
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user
+  
     [super willActivate];
     if ([WCSession isSupported]) {
-        WCSession *session = [WCSession defaultSession];
-        session.delegate = self;
-        [session activateSession];
-//        NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
+      if ([self.wcSession activationState] == WCSessionActivationStateActivated) {
+        // TOOD: ERROR HANDLINGN
+        [self.wcSession sendMessage:@{@"payload":@"update"} replyHandler:nil errorHandler:nil];
+      } else {
+        self.wcSession = [WCSession defaultSession];
+        self.wcSession.delegate = self;
+        [self.wcSession activateSession];
+
+      }
     }
 }
 
@@ -50,12 +57,17 @@
         Token *token = [tstore get:(long)i];
         [row setToken:token];
     }
-    [self.table setNumberOfRows:self.table.numberOfRows withRowType:@"tokenRow"];
+    [self refreshTableView];
+}
+
+- (void)refreshTableView {
+  [self.table setNumberOfRows:self.table.numberOfRows withRowType:@"tokenRow"];
 }
 
 
 - (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
     NSLog(@"Finished activation");
+    [self.wcSession sendMessage:@{@"payload":@"update"} replyHandler:nil errorHandler:nil];
 }
 
 

@@ -10,11 +10,14 @@
 #import "TokenStore.h"
 #import "TokenTableViewCell.h"
 #import "ScanViewController.h"
+#import "AddViewController.h"
+#import <WatchConnectivity/WatchConnectivity.h>
 
-@interface TokenViewController ()
+@interface TokenViewController () <WCSessionDelegate>
 //@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (strong, nonatomic) TokenStore *store;
+@property (strong, nonatomic) WCSession *wcSession;
 @end
 
 @implementation TokenViewController
@@ -27,14 +30,17 @@
     [self.tableView setAllowsSelectionDuringEditing:YES];
 //    self.navigationController.navigationBar.prefersLargeTitles = YES;
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-
     self.store = [[TokenStore alloc] init];
+    if ([WCSession isSupported])
+      [self syncToWatch];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
     [super viewWillAppear:animated];
-    [self.store syncToWatch];
+    if ([WCSession isSupported])
+      [self syncToWatch];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,14 +50,34 @@
 
 # pragma mark - IBActionns
 - (IBAction)addButtonClicked:(id)sender {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+  BOOL hasCamera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront];
+  if (hasCamera) {
+    [self presentScanView];
+  } else {
+    [self presentManualEntryView];
+  }
+}
 
-    ScanViewController *vc = (ScanViewController *)[sb instantiateViewControllerWithIdentifier:@"scanView"];
-    
-    // show controller modally
-    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
-    
-    [self presentViewController:nc animated:YES completion:nil];
+- (void)presentScanView {
+  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+  
+  ScanViewController *vc = (ScanViewController *)[sb instantiateViewControllerWithIdentifier:@"scanView"];
+  
+  // show controller modally
+  UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+  
+  [self presentViewController:nc animated:YES completion:nil];
+}
+
+- (void)presentManualEntryView {
+  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+  
+  AddViewController *vc = (AddViewController *)[sb instantiateViewControllerWithIdentifier:@"manualEntryView"];
+  
+  // show controller modally
+  UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+  
+  [self presentViewController:nc animated:YES completion:nil];
 }
 
 - (IBAction)editButtonnClicked:(id)sender {
@@ -125,7 +151,7 @@
                                        [self.tableView beginUpdates];
                                        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationAutomatic];
                                        [self.store del:indexPath.row];
-                                       [self.store syncToWatch];
+                                       [self syncToWatch];
                                        [self.tableView endUpdates];
                                        [self.tableView reloadData];
                                    }];
@@ -149,4 +175,40 @@
         [cell setSelected:NO];
     }
 }
+
+// SYNCING STUFF
+- (void)syncToWatch {
+  if (!self.wcSession) {
+    NSLog(@"CREATING WCSESSION");
+    self.wcSession = [WCSession defaultSession];
+    self.wcSession.delegate = self;
+    [self.wcSession activateSession];
+  }
+  
+  NSLog(@"Synncinng to watch");
+  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+  // TODO: Err handling
+  [self.wcSession updateApplicationContext:[ud dictionaryRepresentation] error:nil];
+}
+
+- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message {
+  NSLog(@"GOT MESSAGE %@", message);
+  
+  if ([[message valueForKey:@"payload"] isEqualToString:@"update"])
+    [self syncToWatch];
+}
+
+- (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
+  NSLog(@"Finished activation on phone");
+}
+
+
+- (void)sessionDidBecomeInactive:(nonnull WCSession *)session {
+  NSLog(@"Session became inactive");
+}
+
+- (void)sessionDidDeactivate:(nonnull WCSession *)session {
+  NSLog(@"Session deactivated");
+}
+
 @end

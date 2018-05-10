@@ -11,7 +11,6 @@
 #define ORDER_KEY @"2FATokenOrder"
 
 #import "TokenStore.h"
-#import <WatchConnectivity/WatchConnectivity.h>
 
 static NSMutableArray* getOrder(NSUserDefaults* store) {
     NSMutableArray* order = [NSMutableArray arrayWithArray:
@@ -24,7 +23,7 @@ static NSMutableArray* getOrder(NSUserDefaults* store) {
     return order;
 }
 
-@interface TokenStore () <WCSessionDelegate>
+@interface TokenStore ()
 @end
 
 @implementation TokenStore {
@@ -37,13 +36,7 @@ static NSMutableArray* getOrder(NSUserDefaults* store) {
     store = [NSUserDefaults standardUserDefaults];
     if (store == nil)
         return nil;
-    
-    if ([WCSession isSupported]) {
-        WCSession *session = [WCSession defaultSession];
-        session.delegate = self;
-        [session activateSession];
-        [self syncToWatch];
-    }
+  
     return self;
 }
 
@@ -54,7 +47,6 @@ static NSMutableArray* getOrder(NSUserDefaults* store) {
 
 - (void)add:(Token*)token {
     [self add:token atIndex:0];
-    [self syncToWatch];
 }
 
 - (void)add:(Token*)token atIndex:(NSUInteger)index {
@@ -98,14 +90,7 @@ static NSMutableArray* getOrder(NSUserDefaults* store) {
     [store removeObjectForKey:key];
     [store synchronize];
 }
-
-- (void)syncToWatch {
-    WCSession *session = [WCSession defaultSession];
-    session.delegate = self;
-    [session activateSession];
-    // TODO: Err handling
-    [session updateApplicationContext:[store dictionaryRepresentation] error:nil];
-}
+/*
 
 - (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
     NSLog(@"Finished activation on phone");
@@ -124,5 +109,5 @@ static NSMutableArray* getOrder(NSUserDefaults* store) {
     NSLog(@"Session deactivated");
 }
 //# endifr
-
+*/
 @end
