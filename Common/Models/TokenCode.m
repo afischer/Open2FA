@@ -10,64 +10,69 @@
 
 #import "TokenCode.h"
 
-
 static uint64_t currentTimeMillis() {
-    struct timeval t;
-    if (gettimeofday(&t, NULL) != 0)
-        return 0;
-    
-    return t.tv_sec * 1000 + t.tv_usec / 1000;
+  struct timeval t;
+  if (gettimeofday(&t, NULL) != 0)
+    return 0;
+
+  return t.tv_sec * 1000 + t.tv_usec / 1000;
 }
 
 @implementation TokenCode {
-    TokenCode *nextCode;
-    NSString  *codeText;
-    uint64_t   startTime;
-    uint64_t   endTime;
+  TokenCode *nextCode;
+  NSString *codeText;
+  uint64_t startTime;
+  uint64_t endTime;
 }
 
-- (id)initWithCode:(NSString*)code startTime:(time_t)start endTime:(time_t)end {
-    codeText = code;
-    startTime = start * 1000;
-    endTime = end * 1000;
-    nextCode = nil;
-    return self;
+- (id)initWithCode:(NSString *)code
+         startTime:(time_t)start
+           endTime:(time_t)end {
+  codeText = code;
+  startTime = start * 1000;
+  endTime = end * 1000;
+  nextCode = nil;
+  return self;
 }
 
-- (id)initWithCode:(NSString*)code startTime:(time_t)start endTime:(time_t)end
-     nextTokenCode:(TokenCode*)next {
-    self = [self initWithCode:code startTime:start endTime:end];
-    nextCode = next;
-    return self;
+- (id)initWithCode:(NSString *)code
+         startTime:(time_t)start
+           endTime:(time_t)end
+     nextTokenCode:(TokenCode *)next {
+  self = [self initWithCode:code startTime:start endTime:end];
+  nextCode = next;
+  return self;
 }
 
-- (NSString*)currentCode {
-    uint64_t now = currentTimeMillis();
-    if (now < startTime)
-        return nil;
-    if (now < endTime)
-        return codeText;
-    if (nextCode != nil)
-        return [nextCode currentCode];
-    
+- (NSString *)currentCode {
+  uint64_t now = currentTimeMillis();
+  if (now < startTime)
     return nil;
+  
+  if (now < endTime)
+    return codeText;
+  
+  if (nextCode != nil)
+    return [nextCode currentCode];
+
+  return nil;
 }
 
 - (float)currentProgress {
-    uint64_t now = currentTimeMillis();
-    
-    if (now < startTime)
-        return 0.0;
+  uint64_t now = currentTimeMillis();
 
-    if (now < endTime) {
-        float totalTime = (float) (endTime - startTime);
-        return 1.0 - (now - startTime) / totalTime;
-    }
-    
-    if (nextCode != nil)
-        return [nextCode currentProgress];
-    
+  if (now < startTime)
     return 0.0;
+
+  if (now < endTime) {
+    float totalTime = (float)(endTime - startTime);
+    return 1.0 - (now - startTime) / totalTime;
+  }
+
+  if (nextCode != nil)
+    return [nextCode currentProgress];
+
+  return 0.0;
 }
 
 @end

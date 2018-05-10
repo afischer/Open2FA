@@ -19,7 +19,6 @@
 		2E08034120915B9E00DF30E1 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF6E7A120742299001DB731 /* Token.m */; };
 		2E08034220915BC400DF30E1 /* TokenCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF801B207FC409006E889E /* TokenCode.m */; };
 		2E08034320915CC600DF30E1 /* NSString+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF80222084FCB3006E889E /* NSString+Open2FA.m */; };
-		2E08034420915CCC00DF30E1 /* NSData+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD7B832088FDB300621AB4 /* NSData+Open2FA.m */; };
 		2E08034520915D4D00DF30E1 /* Base32.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF801E207FD444006E889E /* Base32.m */; };
 		2E5C31862094B78C00C8B710 /* Base32Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5C31852094B78C00C8B710 /* Base32Tests.m */; };
 		2E8FFE8220769728004F1C7A /* TokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FFE8120769728004F1C7A /* TokenViewController.m */; };
@@ -30,15 +29,14 @@
 		2EAF80232084FCB3006E889E /* NSString+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF80222084FCB3006E889E /* NSString+Open2FA.m */; };
 		2EAF8026208630A1006E889E /* UIColor+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8025208630A1006E889E /* UIColor+Open2FA.m */; };
 		2EAF802920864BBC006E889E /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF802820864BBC006E889E /* ScanViewController.m */; };
-		2EBD7B842088FDB300621AB4 /* NSData+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD7B832088FDB300621AB4 /* NSData+Open2FA.m */; };
 		2ECC46C72074027300C67388 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46C62074027300C67388 /* AppDelegate.m */; };
 		2ECC46CD2074027300C67388 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CB2074027300C67388 /* Main.storyboard */; };
-		2ECC46CF2074027400C67388 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CE2074027400C67388 /* Assets.xcassets */; };
 		2ECC46D22074027400C67388 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46D02074027400C67388 /* LaunchScreen.storyboard */; };
 		2ECC46D52074027400C67388 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46D42074027400C67388 /* main.m */; };
 		2ECC46DF2074027400C67388 /* Open2FATests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46DE2074027400C67388 /* Open2FATests.m */; };
 		2ECC46EA2074027400C67388 /* Open2FAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46E92074027400C67388 /* Open2FAUITests.m */; };
 		2ED83522207A740400C7640E /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED83521207A740400C7640E /* AddViewController.m */; };
+		2EDB73BE20A4B69800C1BD4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CE2074027400C67388 /* Assets.xcassets */; };
 		2EE3FD9920941CE5006F9D88 /* UIColor+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8025208630A1006E889E /* UIColor+Open2FA.m */; };
 		2EF6E7A220742299001DB731 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF6E7A120742299001DB731 /* Token.m */; };
 /* End PBXBuildFile section */
@@ -130,8 +128,6 @@
 		2EAF8025208630A1006E889E /* UIColor+Open2FA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Open2FA.m"; sourceTree = "<group>"; };
 		2EAF802720864BBC006E889E /* ScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		2EAF802820864BBC006E889E /* ScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
-		2EBD7B822088FDB300621AB4 /* NSData+Open2FA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Open2FA.h"; sourceTree = "<group>"; };
-		2EBD7B832088FDB300621AB4 /* NSData+Open2FA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Open2FA.m"; sourceTree = "<group>"; };
 		2ECC46C22074027300C67388 /* Open2FA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Open2FA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECC46C52074027300C67388 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2ECC46C62074027300C67388 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -212,6 +208,7 @@
 		2E08033A2090E46700DF30E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2ECC46CE2074027400C67388 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -245,8 +242,6 @@
 				2EAF8025208630A1006E889E /* UIColor+Open2FA.m */,
 				2EAF80212084FCB3006E889E /* NSString+Open2FA.h */,
 				2EAF80222084FCB3006E889E /* NSString+Open2FA.m */,
-				2EBD7B822088FDB300621AB4 /* NSData+Open2FA.h */,
-				2EBD7B832088FDB300621AB4 /* NSData+Open2FA.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -284,7 +279,6 @@
 				2E8FFE7F2076968C004F1C7A /* ViewControllers */,
 				2ECC46C52074027300C67388 /* AppDelegate.h */,
 				2ECC46C62074027300C67388 /* AppDelegate.m */,
-				2ECC46CE2074027400C67388 /* Assets.xcassets */,
 				2ECC46D32074027400C67388 /* Info-iOS.plist */,
 				2ECC46D02074027400C67388 /* LaunchScreen.storyboard */,
 				2ECC46CB2074027300C67388 /* Main.storyboard */,
@@ -510,8 +504,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EDB73BE20A4B69800C1BD4D /* Assets.xcassets in Resources */,
 				2ECC46D22074027400C67388 /* LaunchScreen.storyboard in Resources */,
-				2ECC46CF2074027400C67388 /* Assets.xcassets in Resources */,
 				2ECC46CD2074027300C67388 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,7 +535,6 @@
 				2E08033D2090FE5400DF30E1 /* TokenWatchRow.m in Sources */,
 				2E08034120915B9E00DF30E1 /* Token.m in Sources */,
 				2E08034020915B4100DF30E1 /* TokenStore.m in Sources */,
-				2E08034420915CCC00DF30E1 /* NSData+Open2FA.m in Sources */,
 				2EE3FD9920941CE5006F9D88 /* UIColor+Open2FA.m in Sources */,
 				2E08032B2090E40100DF30E1 /* ExtensionDelegate.m in Sources */,
 				2E08034520915D4D00DF30E1 /* Base32.m in Sources */,
@@ -566,7 +559,6 @@
 				2ECC46C72074027300C67388 /* AppDelegate.m in Sources */,
 				2EF6E7A220742299001DB731 /* Token.m in Sources */,
 				2EAF8026208630A1006E889E /* UIColor+Open2FA.m in Sources */,
-				2EBD7B842088FDB300621AB4 /* NSData+Open2FA.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
