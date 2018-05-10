@@ -209,11 +209,11 @@
 			path = "Open2FA Watch Extension";
 			sourceTree = "<group>";
 		};
-		2E08033A2090E46700DF30E1 /* Supportinng Files */ = {
+		2E08033A2090E46700DF30E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "Supportinng Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		2E8FFE7F2076968C004F1C7A /* ViewControllers */ = {
@@ -279,7 +279,7 @@
 		2ECC46C42074027300C67388 /* Open2FA */ = {
 			isa = PBXGroup;
 			children = (
-				2E08033A2090E46700DF30E1 /* Supportinng Files */,
+				2E08033A2090E46700DF30E1 /* Supporting Files */,
 				2EAF8016207D3BDA006E889E /* Views */,
 				2E8FFE7F2076968C004F1C7A /* ViewControllers */,
 				2ECC46C52074027300C67388 /* AppDelegate.h */,

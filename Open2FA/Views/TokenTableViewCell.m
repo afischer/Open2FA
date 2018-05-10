@@ -33,7 +33,7 @@
     self.accountLabel.text = tok.account;
     self.logoView.layer.cornerRadius = (CGFloat)8.f;
     self.logoView.clipsToBounds = YES;
-    self.logoView.image = [UIImage imageNamed:@"DPLogo"];
+//    self.logoView.image = [UIImage imageNamed:@"DPLogo"];
     UIFont *sfMonoDig = [UIFont monospacedDigitSystemFontOfSize:38.0
                                                          weight:UIFontWeightMedium];
  

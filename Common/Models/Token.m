@@ -182,6 +182,7 @@ static inline const char* unparseAlgo(CCHmacAlgorithm algo) {
     }
     
     NSLog(@"INITIALIZING TOKEN");
+  NSLog(@"%@, %u, %@, %@", self.issuer, self.algorithm, self.account, self.method);
     return self;
 }
 
