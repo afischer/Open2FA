@@ -253,7 +253,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n32-aa-IWq">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n32-aa-IWq">
                                                     <rect key="frame" x="115" y="8" width="244" height="29"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <segments>
@@ -280,7 +280,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WI0-P2-k6c">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WI0-P2-k6c">
                                                     <rect key="frame" x="115" y="8" width="122" height="29"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <segments>
@@ -328,6 +328,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="account" destination="66W-Q5-5Xg" id="2mv-Ac-5wf"/>
+                        <outlet property="algorithmToggle" destination="n32-aa-IWq" id="Uo3-rm-x5b"/>
+                        <outlet property="digitToggle" destination="WI0-P2-k6c" id="QhA-WU-zVG"/>
                         <outlet property="issuer" destination="ykG-ir-05W" id="zPt-nZ-yc9"/>
                         <outlet property="protocol" destination="D47-Fw-akv" id="41w-8R-hI9"/>
                         <outlet property="secret" destination="fi3-b4-pf7" id="lmA-1d-fa5"/>

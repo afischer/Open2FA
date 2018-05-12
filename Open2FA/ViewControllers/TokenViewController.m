@@ -58,8 +58,11 @@
   }
 }
 
+- (IBAction)digitToggle:(id)sender {
+}
+
 - (void)presentScanView {
-  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil] ;
 
   ScanViewController *vc = (ScanViewController *)[sb
       instantiateViewControllerWithIdentifier:@"scanView"];

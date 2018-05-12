@@ -30,12 +30,15 @@
 
   // protocol
   NSInteger methodIndex = [self.protocol selectedSegmentIndex];
-  NSString *method = [[Token supportedMethods] objectAtIndex:methodIndex];
   NSLog(@"ACCT TEXT %@", self.account.text);
-  Token *token = [[Token alloc] initWithMethod:method
-                                        Issuer:[self.issuer text]
-                                       Account:[self.account text]
-                                        Secret:[self.secret text]];
+  
+  NSString *proto = [[Token supportedMethods] objectAtIndex:methodIndex];
+  NSString *digits = [@[@"6", @"8"] objectAtIndex:[self.digitToggle selectedSegmentIndex]];
+  NSString *algorithm = [@[@"sha1", @"sha256", @"sha512", @"md5"] objectAtIndex:[self.algorithmToggle selectedSegmentIndex]];
+  
+  NSString *uri = [NSString stringWithFormat:@"otpauth://%@/%@:%@?algorithm=%@&digits=%@&secret=%@", proto, [self.issuer text], [self.account text], algorithm, digits, [self.secret text]];
+
+  Token *token = [[Token alloc] initWithURI:[NSURL URLWithString:uri]];
   [[[TokenStore alloc] init] add:token];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
