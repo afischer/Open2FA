@@ -30,11 +30,11 @@
   self.tokenText.text = tok.code.currentCode;
   self.issuerLabel.text = tok.issuer;
   self.accountLabel.text = tok.account;
-  self.logoView.layer.cornerRadius = (CGFloat)8.f;
+  self.logoView.layer.cornerRadius = (CGFloat)self.logoView.bounds.size.width/2;
   self.logoView.clipsToBounds = YES;
-  //    self.logoView.image = [UIImage imageNamed:@"DPLogo"];
+//  self.logoView.image = [UIImage imageNamed:@"DPLogo"];
   UIFont *sfMonoDig =
-      [UIFont monospacedDigitSystemFontOfSize:38.0 weight:UIFontWeightMedium];
+      [UIFont monospacedDigitSystemFontOfSize:30.0 weight:UIFontWeightSemibold];
 
   self.tokenText.font = sfMonoDig;
 
@@ -46,7 +46,6 @@
 }
 
 - (void)updateProgress {
-  NSLog(@"updating");
   float tokenProgress = tok.code.currentProgress;
   BOOL restarted = self.timeProgress.progress < tokenProgress;
   [self.timeProgress setProgress:tokenProgress animated:!restarted];
@@ -54,6 +53,7 @@
     [self.timeProgress setProgressTintColor:[UIColor warningColor]];
   }
   if (restarted) {
+    NSLog(@"New token!");
     self.tokenText.text = tok.code.currentCode;
     [self.timeProgress setProgressTintColor:[UIColor tintColor]];
   }

@@ -46,16 +46,20 @@ static uint64_t currentTimeMillis() {
 
 - (NSString *)currentCode {
   uint64_t now = currentTimeMillis();
+  NSString *code = [[NSString alloc] init];
   if (now < startTime)
-    return nil;
+    code = nil;
   
   if (now < endTime)
-    return codeText;
+    code = codeText;
   
   if (nextCode != nil)
-    return [nextCode currentCode];
+    code = [nextCode currentCode];
 
-  return nil;
+  // add space in center of string easy reading
+  return [NSString stringWithFormat:@"%@ %@",
+          [code substringWithRange:NSMakeRange(0, code.length / 2)],
+          [code substringWithRange:NSMakeRange(code.length / 2, code.length - code.length / 2)]];
 }
 
 - (float)currentProgress {

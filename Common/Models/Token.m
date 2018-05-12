@@ -239,7 +239,6 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
          startTime:now / self.period * self.period + self.period
 
            endTime:now / self.period * self.period + self.period + self.period];
-  NSLog(@"hi");
 
   return [[TokenCode alloc]
        initWithCode:getOTP(self.algorithm, self.digits, secret,
