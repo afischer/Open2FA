@@ -33,16 +33,20 @@
   self.logoView.layer.cornerRadius = (CGFloat)self.logoView.bounds.size.width/2;
   self.logoView.clipsToBounds = YES;
 //  self.logoView.image = [UIImage imageNamed:@"DPLogo"];
-  UIFont *sfMonoDig =
-      [UIFont monospacedDigitSystemFontOfSize:30.0 weight:UIFontWeightSemibold];
 
-  self.tokenText.font = sfMonoDig;
-
-  [NSTimer scheduledTimerWithTimeInterval:1.f
-                                   target:self
-                                 selector:@selector(updateProgress)
-                                 userInfo:nil
-                                  repeats:YES];
+  self.tokenText.font = [UIFont monospacedDigitSystemFontOfSize:30.0 weight:UIFontWeightSemibold];
+  
+  if ([tok.type isEqualToString:@"hotp"]) {
+    self.refreshButton.hidden = NO;
+    self.timeProgress.hidden = YES;
+  } else {
+    [NSTimer scheduledTimerWithTimeInterval:1.f
+                                     target:self
+                                   selector:@selector(updateProgress)
+                                   userInfo:nil
+                                    repeats:YES];
+  }
+  
 }
 
 - (void)updateProgress {
@@ -62,4 +66,10 @@
 - (void)setProgressVisibility:(BOOL)visibile {
   [self.timeProgress setHidden:!visibile];
 }
+
+- (IBAction)hotpDidRefresh:(id)sender {
+  NSLog(@"new hotp");
+  self.tokenText.text = tok.code.currentCode;
+}
+
 @end

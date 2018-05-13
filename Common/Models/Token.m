@@ -97,8 +97,8 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   NSData *secret;
 }
 
-+ (NSArray *)supportedMethods {
-  NSArray *methods = [NSArray arrayWithObjects:@"totp", @"htop", nil];
++ (NSArray *)supportedTypes {
+  NSArray *methods = [NSArray arrayWithObjects:@"totp", @"hotp", nil];
   return methods;
 }
 
@@ -109,9 +109,9 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   if (![[uri scheme] isEqualToString:@"otpauth"])
     return nil;
 
-  // get method
-  self.method = [uri host];
-  if (![[Token supportedMethods] containsObject:self.method])
+  // get type
+  self.type = [uri host];
+  if (![[Token supportedTypes] containsObject:self.type])
     return nil;
 
   // PATH PARSING
@@ -175,18 +175,18 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
     self.digits = 6;
 
   // Get counter
-  if ([self.method isEqualToString:@"hotp"]) {
+  if ([self.type isEqualToString:@"hotp"]) {
     NSString *c = [query objectForKey:@"counter"];
     self.counter = c != nil ? [c longLongValue] : 0;
   }
 
   NSLog(@"INITIALIZING TOKEN");
   NSLog(@"%@, %u, %@, %@", self.issuer, self.algorithm, self.account,
-        self.method);
+        self.type);
   return self;
 }
 
-- (id)initWithMethod:(NSString *)method
+- (id)initWithType:(NSString *)method
               Issuer:(NSString *)issuer
              Account:(NSString *)account
               Secret:(NSString *)secret {
@@ -199,7 +199,7 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
 
 - (NSString *)uid { // FIX THIS
   NSString *uidStr =
-      [NSString stringWithFormat:@"%@:%@", self.issuer, self.method];
+      [NSString stringWithFormat:@"%@:%@", self.issuer, self.type];
   return [uidStr stringByAddingPercentEncodingWithAllowedCharacters:
                      [NSCharacterSet URLQueryAllowedCharacterSet]];
 }
@@ -210,7 +210,7 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
       stringWithFormat:@"otpauth://%@/"
                        @"%@:%@?algorithm=%s&digits=%lu&secret=%@&issuer=%@&"
                        @"period=%u",
-                       self.method, self.issuer, self.account,
+                       self.type, self.issuer, self.account,
                        unparseAlgo(self.algorithm), (unsigned long)self.digits,
                        [secret base32String], self.issuer, self.period];
   NSLog(@"GETTING URI %@", uri);
@@ -223,21 +223,19 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   if (now == (time_t)-1)
     now = 0;
 
-  if ([self.method isEqualToString:@"hotp"]) {
-    // TODO: All algorithms
+  if ([self.type isEqualToString:@"hotp"]) {
     NSString *code =
         getOTP(self.algorithm, self.digits, secret, self.counter++);
     return [[TokenCode alloc] initWithCode:code
                                  startTime:now
                                    endTime:now + self.period];
   }
+  
 
   TokenCode *next = [[TokenCode alloc]
       initWithCode:getOTP(self.algorithm, self.digits, secret,
                           now / self.period + 1)
-
          startTime:now / self.period * self.period + self.period
-
            endTime:now / self.period * self.period + self.period + self.period];
 
   return [[TokenCode alloc]

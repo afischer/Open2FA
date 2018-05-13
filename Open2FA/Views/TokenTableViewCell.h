@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIProgressView *timeProgress;
 @property (strong, nonatomic) IBOutlet UILabel *accountLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *logoView;
+@property (strong, nonatomic) IBOutlet UIButton *refreshButton;
 
 - (void)setToken:(Token *)token;
 - (void)setProgressVisibility:(BOOL)visibile;

@@ -19,7 +19,7 @@
 
 @property (nonatomic) NSString* issuer;
 @property (nonatomic) NSString* label;
-@property (nonatomic) NSString* method;
+@property (nonatomic) NSString* type;
 @property (nonatomic) NSString* account;
 @property (nonatomic) CCHmacAlgorithm algorithm;
 @property (nonatomic) NSUInteger digits;
@@ -27,10 +27,10 @@
 @property (nonatomic, readonly) TokenCode *code;
 @property (nonatomic) uint32_t period;
 @property (nonatomic) uint64_t counter;
-+ (NSArray *) supportedMethods;
++ (NSArray *) supportedTypes;
 
 - (id)initWithURI:(NSURL *)uri;
-- (id)initWithMethod:(NSString *)method
+- (id)initWithType:(NSString *)method
               Issuer:(NSString *)issuer
              Account:(NSString *)account
               Secret:(NSString *)secret;

@@ -55,12 +55,21 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75x-l1-Xk5">
+                                            <rect key="frame" x="341" y="35" width="18" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="Refresh"/>
+                                            <connections>
+                                                <action selector="hotpDidRefresh:" destination="v43-Ya-ac1" eventType="touchUpInside" id="zmR-Iz-WOp"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="accountLabel" destination="giq-5D-7RH" id="I2A-Cv-fBW"/>
                                     <outlet property="issuerLabel" destination="90g-H2-VuJ" id="jeG-Wi-ZmE"/>
                                     <outlet property="logoView" destination="uzs-WY-w14" id="Br8-Bq-NZk"/>
+                                    <outlet property="refreshButton" destination="75x-l1-Xk5" id="4yL-h4-yVu"/>
                                     <outlet property="timeProgress" destination="XfY-lV-BvS" id="SyG-Fj-YyB"/>
                                     <outlet property="tokenText" destination="Rg4-1Y-WPr" id="PpB-Dh-OY5"/>
                                 </connections>
@@ -148,12 +157,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="D47-Fw-akv">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="D47-Fw-akv">
                                                     <rect key="frame" x="16" y="8" width="343" height="29"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     <segments>
-                                                        <segment title="Time-Based (TTOP)"/>
-                                                        <segment title="HMAC-Based (HTOP)"/>
+                                                        <segment title="Time-Based (TOTP)"/>
+                                                        <segment title="HMAC-Based (HOTP)"/>
                                                     </segments>
                                                 </segmentedControl>
                                             </subviews>
@@ -374,5 +383,6 @@
     </scenes>
     <resources>
         <image name="DefaultLogo" width="52" height="52"/>
+        <image name="Refresh" width="18" height="22"/>
     </resources>
 </document>

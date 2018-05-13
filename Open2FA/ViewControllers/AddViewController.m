@@ -32,7 +32,7 @@
   NSInteger methodIndex = [self.protocol selectedSegmentIndex];
   NSLog(@"ACCT TEXT %@", self.account.text);
   
-  NSString *proto = [[Token supportedMethods] objectAtIndex:methodIndex];
+  NSString *proto = [[Token supportedTypes] objectAtIndex:methodIndex];
   NSString *digits = [@[@"6", @"8"] objectAtIndex:[self.digitToggle selectedSegmentIndex]];
   NSString *algorithm = [@[@"sha1", @"sha256", @"sha512", @"md5"] objectAtIndex:[self.algorithmToggle selectedSegmentIndex]];
   
