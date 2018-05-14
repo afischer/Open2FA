@@ -27,7 +27,9 @@
 
 - (void)setToken:(Token *)token {
   tok = token;
-  self.tokenText.text = tok.code.currentCode;
+  NSString *otp = [tok getOTP];
+  NSLog(@"GETTING AN OTP: %@", otp);
+  self.tokenText.text = otp;
   self.issuerLabel.text = tok.issuer;
   self.accountLabel.text = tok.account;
   self.logoView.layer.cornerRadius = (CGFloat)self.logoView.bounds.size.width/2;
@@ -50,15 +52,15 @@
 }
 
 - (void)updateProgress {
-  float tokenProgress = tok.code.currentProgress;
-  BOOL restarted = self.timeProgress.progress < tokenProgress;
-  [self.timeProgress setProgress:tokenProgress animated:!restarted];
+  float tokenProgress = [tok progress];
+  BOOL restarted = tokenProgress == 0.0;
+  [self.timeProgress setProgress:tokenProgress animated:tokenProgress < 0.01f];
   if (tokenProgress < 0.1f) {
     [self.timeProgress setProgressTintColor:[UIColor warningColor]];
   }
   if (restarted) {
     NSLog(@"New token!");
-    self.tokenText.text = tok.code.currentCode;
+    self.tokenText.text = tok.getOTP;
     [self.timeProgress setProgressTintColor:[UIColor tintColor]];
   }
 }
@@ -69,7 +71,7 @@
 
 - (IBAction)hotpDidRefresh:(id)sender {
   NSLog(@"new hotp");
-  self.tokenText.text = tok.code.currentCode;
+  self.tokenText.text = tok.getOTP;
 }
 
 @end

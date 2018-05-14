@@ -8,7 +8,7 @@
 //  Thanks to Nathaniel McCallum <npmccallum@redhat.com> and OpenOTP
 //
 
-#import "TokenCode.h"
+//#import "TokenCode.h"
 #import "Base32.h"
 #import "NSString+Open2FA.h"
 //#import "NSData+Open2FA.h"
@@ -24,11 +24,13 @@
 @property (nonatomic) CCHmacAlgorithm algorithm;
 @property (nonatomic) NSUInteger digits;
 @property (nonatomic, readonly) NSString* uid;
-@property (nonatomic, readonly) TokenCode *code;
+//@property (nonatomic, readonly) TokenCode *code;
 @property (nonatomic) uint32_t period;
 @property (nonatomic) uint64_t counter;
 + (NSArray *) supportedTypes;
-
+- (NSString *)getOTP;
+- (NSString *)getOTPForDate:(NSDate *)date;
+- (float)progress;
 - (id)initWithURI:(NSURL *)uri;
 - (id)initWithType:(NSString *)method
               Issuer:(NSString *)issuer

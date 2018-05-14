@@ -7,7 +7,7 @@
 //
 
 #import "TokenWatchRow.h"
-#import "TokenCode.h"
+//#import "TokenCode.h"
 
 @interface TokenWatchRow ()
 @property (weak, nonatomic) IBOutlet WKInterfaceImage *imageView;
@@ -17,8 +17,7 @@
 
 @implementation TokenWatchRow
 - (void)setToken:(Token *)token {
-    TokenCode *code = token.code;
-    [self.tokenLabel setText:code.currentCode];
+    [self.tokenLabel setText:token.getOTP];
     [self.issuerLabel setText:token.issuer];
 }
 @end
