@@ -17,14 +17,12 @@
 		2E08033D2090FE5400DF30E1 /* TokenWatchRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E08033C2090FE5400DF30E1 /* TokenWatchRow.m */; };
 		2E08034020915B4100DF30E1 /* TokenStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8014207D3496006E889E /* TokenStore.m */; };
 		2E08034120915B9E00DF30E1 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF6E7A120742299001DB731 /* Token.m */; };
-		2E08034220915BC400DF30E1 /* TokenCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF801B207FC409006E889E /* TokenCode.m */; };
 		2E08034320915CC600DF30E1 /* NSString+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF80222084FCB3006E889E /* NSString+Open2FA.m */; };
 		2E08034520915D4D00DF30E1 /* Base32.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF801E207FD444006E889E /* Base32.m */; };
 		2E5C31862094B78C00C8B710 /* Base32Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5C31852094B78C00C8B710 /* Base32Tests.m */; };
 		2E8FFE8220769728004F1C7A /* TokenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FFE8120769728004F1C7A /* TokenViewController.m */; };
 		2EAF8015207D3496006E889E /* TokenStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8014207D3496006E889E /* TokenStore.m */; };
 		2EAF8019207D3BF8006E889E /* TokenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8018207D3BF8006E889E /* TokenTableViewCell.m */; };
-		2EAF801C207FC409006E889E /* TokenCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF801B207FC409006E889E /* TokenCode.m */; };
 		2EAF801F207FD444006E889E /* Base32.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF801E207FD444006E889E /* Base32.m */; };
 		2EAF80232084FCB3006E889E /* NSString+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF80222084FCB3006E889E /* NSString+Open2FA.m */; };
 		2EAF8026208630A1006E889E /* UIColor+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8025208630A1006E889E /* UIColor+Open2FA.m */; };
@@ -38,6 +36,8 @@
 		2ED83522207A740400C7640E /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED83521207A740400C7640E /* AddViewController.m */; };
 		2EDB73BE20A4B69800C1BD4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CE2074027400C67388 /* Assets.xcassets */; };
 		2EE3FD9920941CE5006F9D88 /* UIColor+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8025208630A1006E889E /* UIColor+Open2FA.m */; };
+		2EE5094620AA17CE00234D35 /* HOTPTokenGenerationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE5094520AA17CE00234D35 /* HOTPTokenGenerationTests.m */; };
+		2EE5094820AA186F00234D35 /* TOTPTokenGenerationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE5094720AA186F00234D35 /* TOTPTokenGenerationTests.m */; };
 		2EF6E7A220742299001DB731 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF6E7A120742299001DB731 /* Token.m */; };
 /* End PBXBuildFile section */
 
@@ -118,8 +118,6 @@
 		2EAF8014207D3496006E889E /* TokenStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenStore.m; sourceTree = "<group>"; };
 		2EAF8017207D3BF8006E889E /* TokenTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenTableViewCell.h; sourceTree = "<group>"; };
 		2EAF8018207D3BF8006E889E /* TokenTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenTableViewCell.m; sourceTree = "<group>"; };
-		2EAF801A207FC409006E889E /* TokenCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenCode.h; sourceTree = "<group>"; };
-		2EAF801B207FC409006E889E /* TokenCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenCode.m; sourceTree = "<group>"; };
 		2EAF801D207FD444006E889E /* Base32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base32.h; sourceTree = "<group>"; };
 		2EAF801E207FD444006E889E /* Base32.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Base32.m; sourceTree = "<group>"; };
 		2EAF80212084FCB3006E889E /* NSString+Open2FA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Open2FA.h"; sourceTree = "<group>"; };
@@ -144,6 +142,8 @@
 		2ECC46EB2074027400C67388 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ED83520207A740400C7640E /* AddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		2ED83521207A740400C7640E /* AddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		2EE5094520AA17CE00234D35 /* HOTPTokenGenerationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HOTPTokenGenerationTests.m; sourceTree = "<group>"; };
+		2EE5094720AA186F00234D35 /* TOTPTokenGenerationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TOTPTokenGenerationTests.m; sourceTree = "<group>"; };
 		2EF6E7A020742299001DB731 /* Token.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		2EF6E7A120742299001DB731 /* Token.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,6 +292,8 @@
 			children = (
 				2ECC46E02074027400C67388 /* Info.plist */,
 				2ECC46DE2074027400C67388 /* Open2FATests.m */,
+				2EE5094520AA17CE00234D35 /* HOTPTokenGenerationTests.m */,
+				2EE5094720AA186F00234D35 /* TOTPTokenGenerationTests.m */,
 				2E5C31852094B78C00C8B710 /* Base32Tests.m */,
 			);
 			path = Open2FATests;
@@ -324,8 +326,6 @@
 				2EF6E7A120742299001DB731 /* Token.m */,
 				2EAF8013207D3496006E889E /* TokenStore.h */,
 				2EAF8014207D3496006E889E /* TokenStore.m */,
-				2EAF801A207FC409006E889E /* TokenCode.h */,
-				2EAF801B207FC409006E889E /* TokenCode.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -531,7 +531,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E08034220915BC400DF30E1 /* TokenCode.m in Sources */,
 				2E08033D2090FE5400DF30E1 /* TokenWatchRow.m in Sources */,
 				2E08034120915B9E00DF30E1 /* Token.m in Sources */,
 				2E08034020915B4100DF30E1 /* TokenStore.m in Sources */,
@@ -547,7 +546,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EAF801C207FC409006E889E /* TokenCode.m in Sources */,
 				2EAF8015207D3496006E889E /* TokenStore.m in Sources */,
 				2ECC46D52074027400C67388 /* main.m in Sources */,
 				2EAF80232084FCB3006E889E /* NSString+Open2FA.m in Sources */,
@@ -566,8 +564,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EE5094820AA186F00234D35 /* TOTPTokenGenerationTests.m in Sources */,
 				2ECC46DF2074027400C67388 /* Open2FATests.m in Sources */,
 				2E5C31862094B78C00C8B710 /* Base32Tests.m in Sources */,
+				2EE5094620AA17CE00234D35 /* HOTPTokenGenerationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

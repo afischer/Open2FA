@@ -7,7 +7,6 @@
 //
 
 #import "TokenWatchRow.h"
-//#import "TokenCode.h"
 
 @interface TokenWatchRow ()
 @property (weak, nonatomic) IBOutlet WKInterfaceImage *imageView;
