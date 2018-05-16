@@ -10,13 +10,39 @@
 
 @interface TokenWatchRow ()
 @property (weak, nonatomic) IBOutlet WKInterfaceImage *imageView;
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *tokenLabel;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *issuerLabel;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *tokenLabel;
+@property (weak, nonatomic) IBOutlet WKInterfaceTimer *timer;
+@property (weak, nonatomic) NSTimer *restartTimer;
+@property (strong, nonatomic) Token *t;
 @end
 
 @implementation TokenWatchRow
+
+
+
 - (void)setToken:(Token *)token {
-    [self.tokenLabel setText:token.getOTP];
-    [self.issuerLabel setText:token.issuer];
+  self.t = token;
+  // NOT REALLY ACCURATE AS WE NEED TIME LEFT ON TOKEN SINCE LAST INTERVAL
+  self.restartTimer = [NSTimer scheduledTimerWithTimeInterval:self.t.period
+                                                       target:self
+                                                     selector:@selector(restart)
+                                                     userInfo:nil
+                                                      repeats:YES];
+  [self setLabels];
+}
+  
+
+- (void) setLabels {
+  [self.timer setDate:[NSDate dateWithTimeIntervalSinceNow:self.t.period]];
+  [self.timer start];
+
+  [self.tokenLabel setText:self.t.getOTP];
+  [self.issuerLabel setText:self.t.issuer];
+}
+
+- (void) restart {
+  [self.timer setDate:[NSDate dateWithTimeIntervalSinceNow:self.t.period]];
+  [self.tokenLabel setText:self.t.getOTP];
 }
 @end

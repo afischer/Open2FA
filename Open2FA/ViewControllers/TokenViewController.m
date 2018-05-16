@@ -208,7 +208,7 @@
     didReceiveMessage:(NSDictionary<NSString *, id> *)message {
   NSLog(@"GOT MESSAGE %@", message);
 
-  if ([[message valueForKey:@"payload"] isEqualToString:@"update"])
+//  if ([[message valueForKey:@"payload"] isEqualToString:@"update"])
     [self syncToWatch];
 }
 

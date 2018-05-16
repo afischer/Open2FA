@@ -20,14 +20,6 @@
 
 - (void)awakeWithContext:(id)context {
   [super awakeWithContext:context];
-  // Configure interface objects here.
-}
-
-- (void)willActivate {
-  // This method is called when watch view controller is about to be visible to
-  // user
-
-  [super willActivate];
   if ([WCSession isSupported]) {
     if ([self.wcSession activationState] == WCSessionActivationStateActivated) {
       // TOOD: ERROR HANDLINGN
@@ -40,11 +32,12 @@
       [self.wcSession activateSession];
     }
   }
+  [self refreshTableView];
 }
 
 - (void)session:(WCSession *)session
-    didReceiveApplicationContext:
-        (NSDictionary<NSString *, id> *)applicationContext {
+didReceiveApplicationContext:
+(NSDictionary<NSString *, id> *)applicationContext {
   NSLog(@"GOT CONTEXT");
   NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
   for (NSString *key in [applicationContext allKeys]) {
@@ -52,19 +45,28 @@
     [store setValue:[applicationContext objectForKey:key] forKey:key];
   }
   [store synchronize];
+  
+  
+  // Configure interface objects here.
+}
 
-  TokenStore *tstore = [[TokenStore alloc] init];
-  [self.table setNumberOfRows:[tstore count] withRowType:@"tokenRow"];
-  for (NSInteger i = 0; i < self.table.numberOfRows; i++) {
-    TokenWatchRow *row = [self.table rowControllerAtIndex:i];
-    Token *token = [tstore get:(long)i];
-    [row setToken:token];
-  }
+- (void)willActivate {
+  // This method is called when watch view controller is about to be visible to
+  // user
+  
+  [super willActivate];
   [self refreshTableView];
 }
 
 - (void)refreshTableView {
-  [self.table setNumberOfRows:self.table.numberOfRows withRowType:@"tokenRow"];
+  TokenStore *tstore = [[TokenStore alloc] init];
+  [self.table setNumberOfRows:[tstore count] withRowType:@"tokenRow"];
+  for (NSInteger i = 0; i < self.table.numberOfRows; i++) {
+    TokenWatchRow *row = [self.table rowControllerAtIndex:i];
+    Token *token = [tstore get:(int)i];
+    NSLog(@"TOTOTOTOOTOTOTOTO %@", token.getOTP);
+    [row setToken:token];
+  }
 }
 
 - (void)session:(nonnull WCSession *)session
