@@ -8,11 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2E0803192090E40000DF30E1 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E0803172090E40000DF30E1 /* Interface.storyboard */; };
-		2E08031B2090E40100DF30E1 /* Assets-watch.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E08031A2090E40100DF30E1 /* Assets-watch.xcassets */; };
 		2E0803222090E40100DF30E1 /* Open2FA Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2E0803212090E40100DF30E1 /* Open2FA Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2E0803282090E40100DF30E1 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0803272090E40100DF30E1 /* InterfaceController.m */; };
 		2E08032B2090E40100DF30E1 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E08032A2090E40100DF30E1 /* ExtensionDelegate.m */; };
-		2E08032D2090E40200DF30E1 /* Assets-watchextension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E08032C2090E40200DF30E1 /* Assets-watchextension.xcassets */; };
 		2E0803312090E40200DF30E1 /* Open2FA Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2E0803152090E40000DF30E1 /* Open2FA Watch.app */; };
 		2E08033D2090FE5400DF30E1 /* TokenWatchRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E08033C2090FE5400DF30E1 /* TokenWatchRow.m */; };
 		2E08034020915B4100DF30E1 /* TokenStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8014207D3496006E889E /* TokenStore.m */; };
@@ -38,6 +36,8 @@
 		2EE3FD9920941CE5006F9D88 /* UIColor+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8025208630A1006E889E /* UIColor+Open2FA.m */; };
 		2EE5094620AA17CE00234D35 /* HOTPTokenGenerationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE5094520AA17CE00234D35 /* HOTPTokenGenerationTests.m */; };
 		2EE5094820AA186F00234D35 /* TOTPTokenGenerationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE5094720AA186F00234D35 /* TOTPTokenGenerationTests.m */; };
+		2EE5094A20ACB00800234D35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CE2074027400C67388 /* Assets.xcassets */; };
+		2EE5094B20ACB00900234D35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CE2074027400C67388 /* Assets.xcassets */; };
 		2EF6E7A220742299001DB731 /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF6E7A120742299001DB731 /* Token.m */; };
 /* End PBXBuildFile section */
 
@@ -100,15 +100,13 @@
 /* Begin PBXFileReference section */
 		2E0803152090E40000DF30E1 /* Open2FA Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Open2FA Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E0803182090E40000DF30E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		2E08031A2090E40100DF30E1 /* Assets-watch.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-watch.xcassets"; sourceTree = "<group>"; };
-		2E08031C2090E40100DF30E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E08031C2090E40100DF30E1 /* Info-watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
 		2E0803212090E40100DF30E1 /* Open2FA Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Open2FA Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E0803262090E40100DF30E1 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
 		2E0803272090E40100DF30E1 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
 		2E0803292090E40100DF30E1 /* ExtensionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionDelegate.h; sourceTree = "<group>"; };
 		2E08032A2090E40100DF30E1 /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
-		2E08032C2090E40200DF30E1 /* Assets-watchextension.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-watchextension.xcassets"; sourceTree = "<group>"; };
-		2E08032E2090E40200DF30E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E08032E2090E40200DF30E1 /* Info-watchOS-ext.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-watchOS-ext.plist"; sourceTree = "<group>"; };
 		2E08033B2090FE5400DF30E1 /* TokenWatchRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenWatchRow.h; sourceTree = "<group>"; };
 		2E08033C2090FE5400DF30E1 /* TokenWatchRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenWatchRow.m; sourceTree = "<group>"; };
 		2E5C31852094B78C00C8B710 /* Base32Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Base32Tests.m; sourceTree = "<group>"; };
@@ -180,14 +178,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2E0803162090E40000DF30E1 /* Open2FA Watch */ = {
+		2E0803162090E40000DF30E1 /* Open2FA Watch App */ = {
 			isa = PBXGroup;
 			children = (
 				2E0803172090E40000DF30E1 /* Interface.storyboard */,
-				2E08031A2090E40100DF30E1 /* Assets-watch.xcassets */,
-				2E08031C2090E40100DF30E1 /* Info.plist */,
+				2E08031C2090E40100DF30E1 /* Info-watchOS.plist */,
 			);
-			path = "Open2FA Watch";
+			path = "Open2FA Watch App";
 			sourceTree = "<group>";
 		};
 		2E0803252090E40100DF30E1 /* Open2FA Watch Extension */ = {
@@ -197,8 +194,7 @@
 				2E0803272090E40100DF30E1 /* InterfaceController.m */,
 				2E0803292090E40100DF30E1 /* ExtensionDelegate.h */,
 				2E08032A2090E40100DF30E1 /* ExtensionDelegate.m */,
-				2E08032C2090E40200DF30E1 /* Assets-watchextension.xcassets */,
-				2E08032E2090E40200DF30E1 /* Info.plist */,
+				2E08032E2090E40200DF30E1 /* Info-watchOS-ext.plist */,
 				2E08033B2090FE5400DF30E1 /* TokenWatchRow.h */,
 				2E08033C2090FE5400DF30E1 /* TokenWatchRow.m */,
 			);
@@ -208,7 +204,6 @@
 		2E08033A2090E46700DF30E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2ECC46CE2074027400C67388 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -251,8 +246,7 @@
 			children = (
 				2EE3FD9820941CD6006F9D88 /* Common */,
 				2ECC46C42074027300C67388 /* Open2FA */,
-				2E0803162090E40000DF30E1 /* Open2FA Watch */,
-				2E0803252090E40100DF30E1 /* Open2FA Watch Extension */,
+				2EE5094920ACAEDA00234D35 /* Open2FA Watch */,
 				2ECC46DD2074027400C67388 /* Open2FATests */,
 				2ECC46E82074027400C67388 /* Open2FAUITests */,
 				2ECC46C32074027300C67388 /* Products */,
@@ -311,12 +305,22 @@
 		2EE3FD9820941CD6006F9D88 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2ECC46CE2074027400C67388 /* Assets.xcassets */,
 				2EAF801D207FD444006E889E /* Base32.h */,
 				2EAF801E207FD444006E889E /* Base32.m */,
 				2EAF80202084FC66006E889E /* Categories */,
 				2EF6E79F2074225B001DB731 /* Models */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		2EE5094920ACAEDA00234D35 /* Open2FA Watch */ = {
+			isa = PBXGroup;
+			children = (
+				2E0803162090E40000DF30E1 /* Open2FA Watch App */,
+				2E0803252090E40100DF30E1 /* Open2FA Watch Extension */,
+			);
+			path = "Open2FA Watch";
 			sourceTree = "<group>";
 		};
 		2EF6E79F2074225B001DB731 /* Models */ = {
@@ -487,7 +491,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E08031B2090E40100DF30E1 /* Assets-watch.xcassets in Resources */,
+				2EE5094B20ACB00900234D35 /* Assets.xcassets in Resources */,
 				2E0803192090E40000DF30E1 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,7 +500,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E08032D2090E40200DF30E1 /* Assets-watchextension.xcassets in Resources */,
+				2EE5094A20ACB00800234D35 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,7 +642,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
-				INFOPLIST_FILE = "Open2FA Watch Extension/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA Watch/Open2FA Watch Extension/Info-watchOS-ext.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -659,7 +663,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
-				INFOPLIST_FILE = "Open2FA Watch Extension/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA Watch/Open2FA Watch Extension/Info-watchOS-ext.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -681,7 +685,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
 				IBSC_MODULE = Open2FA_Watch_Extension;
-				INFOPLIST_FILE = "Open2FA Watch/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA Watch/Open2FA Watch App/Info-watchOS.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = me.andrewfischer.Open2FA.watchOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -698,7 +702,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
 				IBSC_MODULE = Open2FA_Watch_Extension;
-				INFOPLIST_FILE = "Open2FA Watch/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA Watch/Open2FA Watch App/Info-watchOS.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = me.andrewfischer.Open2FA.watchOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
