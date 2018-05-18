@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "TokenStore.h"
 
 @interface AppDelegate ()
 
@@ -47,5 +48,24 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  Token *token = [[Token alloc] initWithURI:url];
+  
+  if (!token)
+    return NO;
+  
+  [[[TokenStore alloc] init] add:token];
+  [self.window.rootViewController loadView];
+  return YES;
+}
+
+//- (BOOL)application:(UIApplication *)application
+//            openURL:(NSURL *)url
+//  sourceApplication:(NSString *)sourceApplication
+//         annotation:(id)annotation {
+//
+//}
 
 @end

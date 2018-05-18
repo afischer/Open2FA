@@ -478,10 +478,10 @@
 			projectRoot = "";
 			targets = (
 				2ECC46C12074027300C67388 /* Open2FA */,
-				2ECC46D92074027400C67388 /* Open2FATests */,
-				2ECC46E42074027400C67388 /* Open2FAUITests */,
 				2E0803142090E40000DF30E1 /* Open2FA Watch */,
 				2E0803202090E40100DF30E1 /* Open2FA Watch Extension */,
+				2ECC46D92074027400C67388 /* Open2FATests */,
+				2ECC46E42074027400C67388 /* Open2FAUITests */,
 			);
 		};
 /* End PBXProject section */
