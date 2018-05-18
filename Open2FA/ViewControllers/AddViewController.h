@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UITextField *account;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *digitToggle;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *algorithmToggle;
+@property (nonatomic, copy) void (^didDismiss)(void);
 @end

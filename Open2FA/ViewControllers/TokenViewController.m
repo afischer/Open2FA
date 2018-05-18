@@ -70,7 +70,7 @@
   // show controller modally
   UINavigationController *nc =
       [[UINavigationController alloc] initWithRootViewController:vc];
-
+  nc.modalPresentationStyle = UIModalPresentationFormSheet;
   [self presentViewController:nc animated:YES completion:nil];
 }
 
@@ -80,11 +80,22 @@
   AddViewController *vc = (AddViewController *)[sb
       instantiateViewControllerWithIdentifier:@"manualEntryView"];
 
-  // show controller modally
+  vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissVC)];
+
+  vc.didDismiss = ^() {
+    [self.tableView reloadData];
+  };
+
+  
   UINavigationController *nc =
       [[UINavigationController alloc] initWithRootViewController:vc];
-
+  nc.modalPresentationStyle = UIModalPresentationFormSheet;
+  
   [self presentViewController:nc animated:YES completion:nil];
+}
+
+- (void) dismissVC {
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)editButtonnClicked:(id)sender {

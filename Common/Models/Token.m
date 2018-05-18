@@ -274,7 +274,7 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
 
 - (float)progress {
   uint64_t now = currentTimeMillis();
-  NSLog(@"NOW %llu START %llu ENED %llu", now, tokenStart, tokenEnd);
+//  NSLog(@"NOW %llu START %llu ENED %llu", now, tokenStart, tokenEnd);
   
   float timeRemaining = (float)(tokenEnd - now) / 1000 / self.period;
   if (timeRemaining > 1) // need new token

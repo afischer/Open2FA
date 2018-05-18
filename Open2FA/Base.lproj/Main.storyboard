@@ -55,8 +55,8 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75x-l1-Xk5">
-                                            <rect key="frame" x="341" y="35" width="18" height="22"/>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75x-l1-Xk5">
+                                            <rect key="frame" x="337" y="35" width="22" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="Refresh"/>
                                             <connections>
@@ -99,7 +99,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pqk-wM-1wp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1398" y="-248"/>
+            <point key="canvasLocation" x="1397.5999999999999" y="-248.72563718140933"/>
         </scene>
         <!--Scan-->
         <scene sceneID="egN-PP-55k">
@@ -383,6 +383,6 @@
     </scenes>
     <resources>
         <image name="DefaultLogo" width="52" height="52"/>
-        <image name="Refresh" width="18" height="22"/>
+        <image name="Refresh" width="512" height="512"/>
     </resources>
 </document>

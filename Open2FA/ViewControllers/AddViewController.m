@@ -11,7 +11,6 @@
 #import "TokenStore.h"
 
 @interface AddViewController ()
-
 @end
 
 @implementation AddViewController
@@ -41,6 +40,7 @@
   Token *token = [[Token alloc] initWithURI:[NSURL URLWithString:uri]];
   [[[TokenStore alloc] init] add:token];
   [self dismissViewControllerAnimated:YES completion:nil];
+  self.didDismiss();
 }
 
 @end
