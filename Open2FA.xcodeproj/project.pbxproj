@@ -29,7 +29,6 @@
 		2ECC46CD2074027300C67388 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CB2074027300C67388 /* Main.storyboard */; };
 		2ECC46D22074027400C67388 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46D02074027400C67388 /* LaunchScreen.storyboard */; };
 		2ECC46D52074027400C67388 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46D42074027400C67388 /* main.m */; };
-		2ECC46DF2074027400C67388 /* Open2FATests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46DE2074027400C67388 /* Open2FATests.m */; };
 		2ECC46EA2074027400C67388 /* Open2FAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46E92074027400C67388 /* Open2FAUITests.m */; };
 		2ED83522207A740400C7640E /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED83521207A740400C7640E /* AddViewController.m */; };
 		2EDB73BE20A4B69800C1BD4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CE2074027400C67388 /* Assets.xcassets */; };
@@ -133,7 +132,6 @@
 		2ECC46D32074027400C67388 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		2ECC46D42074027400C67388 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2ECC46DA2074027400C67388 /* Open2FATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Open2FATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2ECC46DE2074027400C67388 /* Open2FATests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Open2FATests.m; sourceTree = "<group>"; };
 		2ECC46E02074027400C67388 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ECC46E52074027400C67388 /* Open2FAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Open2FAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECC46E92074027400C67388 /* Open2FAUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Open2FAUITests.m; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				2ECC46E02074027400C67388 /* Info.plist */,
-				2ECC46DE2074027400C67388 /* Open2FATests.m */,
 				2EE5094520AA17CE00234D35 /* HOTPTokenGenerationTests.m */,
 				2EE5094720AA186F00234D35 /* TOTPTokenGenerationTests.m */,
 				2E5C31852094B78C00C8B710 /* Base32Tests.m */,
@@ -569,7 +566,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EE5094820AA186F00234D35 /* TOTPTokenGenerationTests.m in Sources */,
-				2ECC46DF2074027400C67388 /* Open2FATests.m in Sources */,
 				2E5C31862094B78C00C8B710 /* Base32Tests.m in Sources */,
 				2EE5094620AA17CE00234D35 /* HOTPTokenGenerationTests.m in Sources */,
 			);

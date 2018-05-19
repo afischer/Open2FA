@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CommonCrypto/CommonHMAC.h>
 #import "Base32.h"
 
 @interface NSString (Open2FA)
-//- (NSData*) asBase32Data;
 - (NSString *) percentEncoded;
+- (CCHmacAlgorithm) hmacAlgorithm;
 @end

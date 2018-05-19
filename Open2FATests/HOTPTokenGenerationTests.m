@@ -51,6 +51,4 @@
   XCTAssertTrue([[token getOTP] isEqualToString:@"520489"]);
 }
 
-
-
 @end

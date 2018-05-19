@@ -19,30 +19,6 @@ static uint64_t currentTimeMillis() {
   return t.tv_sec * 1000 + t.tv_usec / 1000;
 }
 
-static CCHmacAlgorithm parseAlgo(const NSString *algo) {
-  static struct {
-    const char *name;
-    CCHmacAlgorithm num;
-  } algomap[] = {
-      {"md5", kCCHmacAlgMD5},
-      {"sha1", kCCHmacAlgSHA1},
-      {"sha256", kCCHmacAlgSHA256},
-      {"sha512", kCCHmacAlgSHA512},
-  };
-  if (algo == nil)
-    return kCCHmacAlgSHA1;
-
-  const char *calgo = [algo cStringUsingEncoding:NSUTF8StringEncoding];
-  if (calgo == NULL)
-    return kCCHmacAlgSHA1;
-  for (int i = 0; i < sizeof(algomap) / sizeof(algomap[0]); i++) {
-    if (strcasecmp(calgo, algomap[i].name) == 0)
-      return algomap[i].num;
-  }
-  
-  return kCCHmacAlgSHA1; // fallback to sha1
-}
-
 static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   switch (algo) {
   case kCCHmacAlgMD5:
@@ -105,6 +81,17 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
 
   // Parse query
   NSMutableDictionary *query = [[NSMutableDictionary alloc] init];
+  NSURLComponents *components = [[NSURLComponents alloc] initWithURL:uri
+                                             resolvingAgainstBaseURL:NO];
+  
+  NSLog(@"QUERY ITEMS: %@", [components queryItems]);
+  for (NSURLQueryItem *item in [components queryItems]) {
+    if ([item.name isEqualToString:@"secret"]) {
+      secretStr = item.value;
+      secret = [NSData dataWithBase32String:item.value];
+    }
+  }
+  
   pathComponents = [[uri query] componentsSeparatedByString:@"&"];
   for (NSString *kv in pathComponents) {
     NSArray *tmp = [kv componentsSeparatedByString:@"="];
@@ -112,20 +99,19 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
       continue;
     [query setValue:[tmp objectAtIndex:1] forKey:[tmp objectAtIndex:0]];
   }
-
-  secretStr = [query objectForKey:@"secret"];
-  secret = [NSData dataWithBase32String:[query objectForKey:@"secret"]];
-  NSLog(@"SEcret tho? %@", query);
+//
+//  secretStr = [query objectForKey:@"secret"];
+  
+//  NSLog(@"SEcret tho? %@", query);
   NSLog(@"SECRET PARSED: %@", [secret base32String]);
   if (secret == nil)
     return nil;
 
   // Get algorithm and digits
-  self.algorithm = parseAlgo([query objectForKey:@"algorithm"]);
-  if (unparseAlgo(self.algorithm) == nil) {
-    // THROW BAD ERROR BAD bad!
+  self.algorithm = [[query objectForKey:@"algorithm"] hmacAlgorithm];
+  if (self.algorithm == -1) {
+    self.algorithm = kCCHmacAlgSHA1;
   }
-  //    self.digits = [query objectForKey:@"digits"];
 
   // Get period
   NSString *p = [query objectForKey:@"period"];
@@ -210,11 +196,7 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
 
 
 - (NSString *)codeWithCount:(uint64_t)counter {
-  // check if code still good
   uint64_t now = currentTimeMillis();
-  
-  // otherwise, expire and get a new code
-  
   NSUInteger hashLength = 0;
   
   // mod table divisor
@@ -237,25 +219,18 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   
   NSMutableData *hash = [NSMutableData dataWithLength:hashLength];
   
-  counter = NSSwapHostLongLongToBig(counter);
-  NSData *counterData = [NSData dataWithBytes:&counter
-                                       length:sizeof(counter)];
-//  CCHmacContext ctx;
-//  CCHmacInit(&ctx, self.algorithm, [secret bytes], [secret length]);
-//  CCHmacUpdate(&ctx, [counterData bytes], [counterData length]);
-//  CCHmacFinal(&ctx, [hash mutableBytes]);
-//  [NSData dataWithBase32String:secretStr]
-  CCHmac(self.algorithm, [secret bytes], [secret length], [counterData bytes], [counterData length], [hash mutableBytes]);
+  counter = NSSwapHostLongLongToBig(counter); // fix endianness  
+  CCHmac(self.algorithm, [secret bytes], [secret length], &counter, sizeof(counter), [hash mutableBytes]);
 
   const char *ptr = [hash bytes];
   
   uint32_t binary;
   uint32_t offset = ptr[hashLength - 1] & 0x0f;
-  binary  = (ptr[offset + 0] & 0x7f) << 0x18;
-  binary |= (ptr[offset + 1] & 0xff) << 0x10;
-  binary |= (ptr[offset + 2] & 0xff) << 0x08;
-  binary |= (ptr[offset + 3] & 0xff) << 0x00;
-  uint32_t pinValue = binary % div;
+  binary  = (ptr[offset + 0] & 0x7f) << 24;
+  binary |= (ptr[offset + 1] & 0xff) << 16;
+  binary |= (ptr[offset + 2] & 0xff) << 8;
+  binary |= (ptr[offset + 3] & 0xff);
+  uint32_t otp = binary % div;
   
 
   NSLog(@"secret: %@", secret);
@@ -263,11 +238,11 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   NSLog(@"hash: %@", hash);
   NSLog(@"offset: %d", offset);
   NSLog(@"truncatedHash: %d", binary);
-  NSLog(@"pinValue: %d", pinValue);
+  NSLog(@"otp: %d", otp);
   
   tokenStart = now - (now % (self.period * 1000)); // round to nearest T0
   tokenEnd = tokenStart + (self.period * 1000);
-  currCode = [NSString stringWithFormat:@"%0*u", (int)self.digits, pinValue];
+  currCode = [NSString stringWithFormat:@"%0*u", (int)self.digits, otp];
   
   return currCode;
 }
