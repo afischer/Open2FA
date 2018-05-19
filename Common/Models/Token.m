@@ -114,9 +114,9 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   }
 
   secretStr = [query objectForKey:@"secret"];
-  secret = [[query objectForKey:@"secret"] dataUsingEncoding:NSASCIIStringEncoding];
+  secret = [NSData dataWithBase32String:[query objectForKey:@"secret"]];
   NSLog(@"SEcret tho? %@", query);
-  NSLog(@"SECRET PARSED: %@", secret);
+  NSLog(@"SECRET PARSED: %@", [secret base32String]);
   if (secret == nil)
     return nil;
 
@@ -244,7 +244,7 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
 //  CCHmacInit(&ctx, self.algorithm, [secret bytes], [secret length]);
 //  CCHmacUpdate(&ctx, [counterData bytes], [counterData length]);
 //  CCHmacFinal(&ctx, [hash mutableBytes]);
-  
+//  [NSData dataWithBase32String:secretStr]
   CCHmac(self.algorithm, [secret bytes], [secret length], [counterData bytes], [counterData length], [hash mutableBytes]);
 
   const char *ptr = [hash bytes];

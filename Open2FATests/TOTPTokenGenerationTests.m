@@ -31,10 +31,11 @@ Token *token;
   for (NSString * key in [[defaults dictionaryRepresentation] allKeys]) {
     [defaults removeObjectForKey:key];
   }
+
   token = [[Token alloc] initWithType:@"totp"
                                Issuer:@"TEST"
                               Account:@"TEST@TEST"
-                               Secret:@"12345678901234567890"];
+                               Secret:[@"12345678901234567890" base32String]];
   d1 = [NSDate dateWithTimeIntervalSince1970:59];
   d2 = [NSDate dateWithTimeIntervalSince1970:1111111109];
   d3 = [NSDate dateWithTimeIntervalSince1970:1111111111];
@@ -109,7 +110,9 @@ Token *token;
 
 - (void)testTOTP256 {
   // from https://tools.ietf.org/html/rfc6238#appendix-B
-  token = [[Token alloc] initWithURI:[NSURL URLWithString:@"otpauth://totp/TEST:TEST@TEST?&secret=12345678901234567890&algorithm=sha256&digits=8"]];
+//  token = [[Token alloc] initWithURI:[NSURL URLWithString:@"otpauth://totp/TEST:TEST@TEST?&secret=12345678901234567890&algorithm=sha256&digits=8"]];
+  token.algorithm = kCCHmacAlgSHA256;
+  token.digits = 8;
   XCTAssertTrue(token.algorithm == kCCHmacAlgSHA256);
   XCTAssertTrue([[token getOTPForDate:d1] isEqualToString:@"46119246"]);
   XCTAssertTrue([[token getOTPForDate:d2] isEqualToString:@"68084774"]);

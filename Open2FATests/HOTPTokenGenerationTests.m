@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "Token.h"
+#import "Base32.h"
 
 @interface HOTPTokenGenerationTests : XCTestCase
 @end
@@ -27,7 +28,7 @@
   Token *token = [[Token alloc] initWithType:@"hotp"
                                       Issuer:@"TEST"
                                      Account:@"TEST@TEST"
-                                      Secret:@"12345678901234567890"];
+                                      Secret:[@"12345678901234567890" base32String]];
   XCTAssertEqual([token counter], 0);
   XCTAssertTrue([[token getOTP] isEqualToString:@"755224"]);
   XCTAssertEqual([token counter], 1);
