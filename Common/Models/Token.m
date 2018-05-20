@@ -33,6 +33,8 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   }
 }
 
+NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
+
 @implementation Token {
   NSData *secret;
   NSString *secretStr;
@@ -48,7 +50,14 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
 
 - (id)initWithURI:(NSURL *)uri {
   self = [super init];
-
+  NSLog(@"INIT WITH URI: %@", uri);
+  
+  // set defaults, will be overwritten by query params if present
+  self.period = 30;
+  self.digits = 6;
+  self.counter = 0;
+  self.algorithm = kCCHmacAlgSHA1;
+  
   // SCHEME PARSING
   if (![[uri scheme] isEqualToString:@"otpauth"])
     return nil;
@@ -67,75 +76,47 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   if ([path length] == 0)
     return nil;
 
-  // get label, issuer if exists
+  // get account, issuer if exists
   NSArray *pathComponents = [path componentsSeparatedByString:@":"];
   NSLog(@"Path components %@", pathComponents);
   if (pathComponents == nil || [pathComponents count] == 0)
     return nil;
   if ([pathComponents count] > 1) {
-    self.issuer = [pathComponents objectAtIndex:0];
-    self.account = [pathComponents objectAtIndex:1];
+    self.issuer = [[pathComponents objectAtIndex:0] urlDecodedString];
+    self.account = [[pathComponents objectAtIndex:1] urlDecodedString];
   } else {
-    self.account = [pathComponents objectAtIndex:0];
+    self.account = [[pathComponents objectAtIndex:0] urlDecodedString];
   }
 
-  // Parse query
-  NSMutableDictionary *query = [[NSMutableDictionary alloc] init];
+  // parse query items
   NSURLComponents *components = [[NSURLComponents alloc] initWithURL:uri
                                              resolvingAgainstBaseURL:NO];
   
-  NSLog(@"QUERY ITEMS: %@", [components queryItems]);
   for (NSURLQueryItem *item in [components queryItems]) {
-    if ([item.name isEqualToString:@"secret"]) {
+    if ([item.name isEqualToString:@"secret"]) {          // SECRET
       secretStr = item.value;
       secret = [NSData dataWithBase32String:item.value];
+    } else if ([item.name isEqualToString:@"algorithm"]) {
+      CCHmacAlgorithm alg = [item.value hmacAlgorithm];
+      self.algorithm = alg == -1 ? kCCHmacAlgSHA1 : alg; // default to sha1
+    } else if ([item.name isEqualToString:@"period"]) {
+      NSString *p = item.value;
+      self.period = p == 0 ? 30 : (int)[p integerValue]; // fix malformed period
+    } else if ([item.name isEqualToString:@"issuer"]) {
+      // TODO: if this is not equal to self.issuer, warn user
+    } else if ([item.name isEqualToString:@"digits"]) {
+      NSString *d = item.value;
+      self.digits = d == 0 ? 6 : (int)[d integerValue];  // fix malformed digits
+    } else if ([item.name isEqualToString:@"counter"]) {
+      if ([self.type isEqualToString:@"hotp"])
+        self.counter = [item.value longLongValue];
+    } else if ([item.name isEqualToString:@""]) {
+      
     }
   }
-  
-  pathComponents = [[uri query] componentsSeparatedByString:@"&"];
-  for (NSString *kv in pathComponents) {
-    NSArray *tmp = [kv componentsSeparatedByString:@"="];
-    if (tmp.count != 2)
-      continue;
-    [query setValue:[tmp objectAtIndex:1] forKey:[tmp objectAtIndex:0]];
-  }
-//
-//  secretStr = [query objectForKey:@"secret"];
-  
-//  NSLog(@"SEcret tho? %@", query);
-  NSLog(@"SECRET PARSED: %@", [secret base32String]);
+  // fail if no secret
   if (secret == nil)
     return nil;
-
-  // Get algorithm and digits
-  self.algorithm = [[query objectForKey:@"algorithm"] hmacAlgorithm];
-  if (self.algorithm == -1) {
-    self.algorithm = kCCHmacAlgSHA1;
-  }
-
-  // Get period
-  NSString *p = [query objectForKey:@"period"];
-  self.period = p != nil ? (int)[p integerValue] : 30;
-  if (self.period == 0)
-    self.period = 30;
-
-  // Get issuer query string
-  if (self.issuer == nil) {
-    self.issuer = [query
-        objectForKey:@"query"]; // THROW WARNING IF NOT EQUAL TO ISSUER ALREADY
-  }
-
-  NSString *d = [query objectForKey:@"digits"];
-  self.digits = d != nil ? (int)[d integerValue] : 6;
-  if (self.digits == 0)
-    self.digits = 6;
-
-  // Get counter
-  if ([self.type isEqualToString:@"hotp"]) {
-    NSString *c = [query objectForKey:@"counter"];
-    self.counter = c != nil ? [c longLongValue] : 0;
-  }
-
 
   return self;
 }
@@ -145,17 +126,17 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
              Account:(NSString *)account
               Secret:(NSString *)secret {
   NSString *uri = [NSString stringWithFormat:@"otpauth://%@/%@:%@?&secret=%@",
-                                             method, [issuer percentEncoded],
-                                             [account percentEncoded], secret];
-  NSLog(@"THE UR I IS %@", uri);
+                                             method, [issuer urlEncodedString],
+                                             [account urlEncodedString], secret];
+
   return [self initWithURI:[NSURL URLWithString:uri]];
 }
 
 - (NSString *)uid { // FIX THIS
   NSString *uidStr =
-      [NSString stringWithFormat:@"%@:%@", self.issuer, self.type];
-  return [uidStr stringByAddingPercentEncodingWithAllowedCharacters:
-                     [NSCharacterSet URLQueryAllowedCharacterSet]];
+      [NSString stringWithFormat:@"%@%d:%@", storePrefix,
+       (int)self.issuer, [self.account urlEncodedString]];
+  return [uidStr urlEncodedString];
 }
 
 - (NSString *)tokenURI {
@@ -168,8 +149,7 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
                        unparseAlgo(self.algorithm), (unsigned long)self.digits,
                        secretStr, self.issuer, self.period];
   NSLog(@"GETTING URI %@", uri);
-  return [uri stringByAddingPercentEncodingWithAllowedCharacters:
-                  [NSCharacterSet URLQueryAllowedCharacterSet]];
+  return [uri urlEncodedString];
 }
 
 - (NSString *)getOTP {
@@ -186,10 +166,9 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   if ([self.type isEqualToString:@"hotp"]) {
     return [self codeWithCount:self.counter++];
   } else {
-    // generate counter for totp
+    // calculate counter for totp
     NSTimeInterval seconds = [date timeIntervalSince1970];
     uint64_t counter = (uint64_t)(seconds / self.period);
-    NSLog(@"We calculated the counter to be %llu", counter);
     return [self codeWithCount:counter];
   }
 }
@@ -233,12 +212,12 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   uint32_t otp = binary % div;
   
 
-  NSLog(@"secret: %@", secret);
-  NSLog(@"counter: %llu", counter);
-  NSLog(@"hash: %@", hash);
-  NSLog(@"offset: %d", offset);
-  NSLog(@"truncatedHash: %d", binary);
-  NSLog(@"otp: %d", otp);
+//  NSLog(@"secret: %@", secret);
+//  NSLog(@"counter: %llu", counter);
+//  NSLog(@"hash: %@", hash);
+//  NSLog(@"offset: %d", offset);
+//  NSLog(@"truncatedHash: %d", binary);
+//  NSLog(@"otp: %d", otp);
   
   tokenStart = now - (now % (self.period * 1000)); // round to nearest T0
   tokenEnd = tokenStart + (self.period * 1000);
@@ -249,7 +228,6 @@ static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
 
 - (float)progress {
   uint64_t now = currentTimeMillis();
-//  NSLog(@"NOW %llu START %llu ENED %llu", now, tokenStart, tokenEnd);
   
   float timeRemaining = (float)(tokenEnd - now) / 1000 / self.period;
   if (timeRemaining > 1) // need new token

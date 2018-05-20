@@ -10,8 +10,14 @@
 
 @implementation NSString (Open2FA)
 
-- (NSString *) percentEncoded {
-    return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+- (NSString *) urlEncodedString {
+  return [[NSURL URLWithDataRepresentation:[self dataUsingEncoding:NSUTF8StringEncoding]
+                             relativeToURL:nil] relativeString];
+}
+
+- (NSString *) urlDecodedString {
+  NSString *res = [self stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+  return [res stringByRemovingPercentEncoding];
 }
 
 - (CCHmacAlgorithm) hmacAlgorithm {

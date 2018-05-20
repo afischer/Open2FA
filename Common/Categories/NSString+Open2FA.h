@@ -11,6 +11,7 @@
 #import "Base32.h"
 
 @interface NSString (Open2FA)
-- (NSString *) percentEncoded;
+- (NSString *) urlEncodedString;
+- (NSString *) urlDecodedString;
 - (CCHmacAlgorithm) hmacAlgorithm;
 @end

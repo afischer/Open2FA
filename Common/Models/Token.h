@@ -13,10 +13,11 @@
 
 #import <CommonCrypto/CommonHMAC.h>
 
+extern NSString *const storePrefix;
+
 @interface Token : NSObject
 
 @property (nonatomic) NSString* issuer;
-@property (nonatomic) NSString* label;
 @property (nonatomic) NSString* type;
 @property (nonatomic) NSString* account;
 @property (nonatomic) CCHmacAlgorithm algorithm;

@@ -35,7 +35,7 @@
   NSString *digits = [@[@"6", @"8"] objectAtIndex:[self.digitToggle selectedSegmentIndex]];
   NSString *algorithm = [@[@"sha1", @"sha256", @"sha512", @"md5"] objectAtIndex:[self.algorithmToggle selectedSegmentIndex]];
   
-  NSString *uri = [NSString stringWithFormat:@"otpauth://%@/%@:%@?algorithm=%@&digits=%@&secret=%@", proto, [self.issuer text], [self.account text], algorithm, digits, [self.secret text]];
+  NSString *uri = [NSString stringWithFormat:@"otpauth://%@/%@:%@?algorithm=%@&digits=%@&secret=%@", proto, [[self.issuer text] urlEncodedString], [[self.account text] urlEncodedString], algorithm, digits, [self.secret text]];
   NSLog(@"User added URI %@", uri);
   Token *token = [[Token alloc] initWithURI:[NSURL URLWithString:uri]];
   [[[TokenStore alloc] init] add:token];

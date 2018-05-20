@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NSString+Open2FA.h"
 
 @interface AddViewController : UITableViewController <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UISegmentedControl *protocol;
