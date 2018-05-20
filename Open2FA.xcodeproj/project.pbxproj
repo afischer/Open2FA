@@ -246,8 +246,8 @@
 			isa = PBXGroup;
 			children = (
 				2EE3FD9820941CD6006F9D88 /* Common */,
-				2ECC46C42074027300C67388 /* Open2FA */,
-				2EE5094920ACAEDA00234D35 /* Open2FA Watch */,
+				2ECC46C42074027300C67388 /* Open2FA iOS */,
+				2EE5094920ACAEDA00234D35 /* Open2FA watchOS */,
 				2ECC46DD2074027400C67388 /* Open2FATests */,
 				2ECC46E82074027400C67388 /* Open2FAUITests */,
 				2ECC46C32074027300C67388 /* Products */,
@@ -266,7 +266,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2ECC46C42074027300C67388 /* Open2FA */ = {
+		2ECC46C42074027300C67388 /* Open2FA iOS */ = {
 			isa = PBXGroup;
 			children = (
 				2ECC46D32074027400C67388 /* Info-iOS.plist */,
@@ -276,7 +276,7 @@
 				2ECC46D02074027400C67388 /* LaunchScreen.storyboard */,
 				2ECC46CB2074027300C67388 /* Main.storyboard */,
 			);
-			path = Open2FA;
+			path = "Open2FA iOS";
 			sourceTree = "<group>";
 		};
 		2ECC46DD2074027400C67388 /* Open2FATests */ = {
@@ -311,13 +311,13 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		2EE5094920ACAEDA00234D35 /* Open2FA Watch */ = {
+		2EE5094920ACAEDA00234D35 /* Open2FA watchOS */ = {
 			isa = PBXGroup;
 			children = (
 				2E0803162090E40000DF30E1 /* Open2FA Watch App */,
 				2E0803252090E40100DF30E1 /* Open2FA Watch Extension */,
 			);
-			path = "Open2FA Watch";
+			path = "Open2FA watchOS";
 			sourceTree = "<group>";
 		};
 		2EF6E79F2074225B001DB731 /* Models */ = {
@@ -638,7 +638,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
-				INFOPLIST_FILE = "$(SRCROOT)/Open2FA Watch/Open2FA Watch Extension/Info-watchOS-ext.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA watchOS/Open2FA Watch Extension/Info-watchOS-ext.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -659,7 +659,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
-				INFOPLIST_FILE = "$(SRCROOT)/Open2FA Watch/Open2FA Watch Extension/Info-watchOS-ext.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA watchOS/Open2FA Watch Extension/Info-watchOS-ext.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -681,7 +681,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
 				IBSC_MODULE = Open2FA_Watch_Extension;
-				INFOPLIST_FILE = "$(SRCROOT)/Open2FA Watch/Open2FA Watch App/Info-watchOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA watchOS/Open2FA Watch App/Info-watchOS.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = me.andrewfischer.Open2FA.watchOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -698,7 +698,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
 				IBSC_MODULE = Open2FA_Watch_Extension;
-				INFOPLIST_FILE = "$(SRCROOT)/Open2FA Watch/Open2FA Watch App/Info-watchOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA watchOS/Open2FA Watch App/Info-watchOS.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = me.andrewfischer.Open2FA.watchOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -825,7 +825,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
-				INFOPLIST_FILE = "$(SRCROOT)/Open2FA/Info-iOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA iOS/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -844,7 +844,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
-				INFOPLIST_FILE = "$(SRCROOT)/Open2FA/Info-iOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Open2FA iOS/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
