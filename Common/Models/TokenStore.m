@@ -50,6 +50,9 @@ static NSMutableArray *getOrder(NSUserDefaults *store) {
 }
 
 - (void)add:(Token *)token atIndex:(NSUInteger)index {
+  if (!token)
+    return;
+  
   if ([store stringForKey:token.uid] != nil)
     return;
 
@@ -71,14 +74,14 @@ static NSMutableArray *getOrder(NSUserDefaults *store) {
     return nil;
 
   NSLog(@"object for key %@: %@", key, [store objectForKey:key]);
+  
   NSURL *tokenURI = [[NSURL alloc] initWithString:[store objectForKey:key]];
-  NSLog(@"%@, bad", tokenURI);
+
   return [[Token alloc] initWithURI:tokenURI];
 }
 
-- (void)del:(NSUInteger)index {
+- (void)deleteTokenAtIndex:(NSUInteger)index {
   NSMutableArray *order = getOrder(store);
-  NSLog(@"%@", order);
   NSString *key = [order objectAtIndex:index];
   if (key == nil)
     return;
@@ -87,5 +90,21 @@ static NSMutableArray *getOrder(NSUserDefaults *store) {
   [store setObject:order forKey:ORDER_KEY];
   [store removeObjectForKey:key];
   [store synchronize];
+}
+
+- (void)deleteToken:(Token *)token {
+  NSMutableArray *order = getOrder(store);
+  NSUInteger index = [order indexOfObject:token.uid];
+  if (index) {
+    [self deleteTokenAtIndex:index];
+  }
+}
+
+- (void)clear {
+  int i = (int)[getOrder(store) count] - 1;
+  while (i >= 0) {
+    [self deleteTokenAtIndex:i];
+    i--;
+  }
 }
 @end

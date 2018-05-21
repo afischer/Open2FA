@@ -15,5 +15,7 @@
 - (void)add:(Token*)token;
 - (void)add:(Token*)token atIndex:(NSUInteger)index;
 - (Token*)get:(NSUInteger)index;
-- (void)del:(NSUInteger)index;
+- (void)deleteTokenAtIndex:(NSUInteger)index;
+- (void)deleteToken:(Token *)token;
+- (void)clear;
 @end

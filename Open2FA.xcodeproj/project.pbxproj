@@ -188,11 +188,11 @@
 		2E0803252090E40100DF30E1 /* Open2FA Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2E08032E2090E40200DF30E1 /* Info-watchOS-ext.plist */,
 				2E0803262090E40100DF30E1 /* InterfaceController.h */,
 				2E0803272090E40100DF30E1 /* InterfaceController.m */,
 				2E0803292090E40100DF30E1 /* ExtensionDelegate.h */,
 				2E08032A2090E40100DF30E1 /* ExtensionDelegate.m */,
-				2E08032E2090E40200DF30E1 /* Info-watchOS-ext.plist */,
 				2E08033B2090FE5400DF30E1 /* TokenWatchRow.h */,
 				2E08033C2090FE5400DF30E1 /* TokenWatchRow.m */,
 			);

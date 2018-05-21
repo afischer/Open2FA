@@ -31,7 +31,7 @@
   //    self.navigationController.navigationBar.prefersLargeTitles = YES;
   self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
   self.store = [[TokenStore alloc] init];
-  if ([WCSession isSupported])
+  if (WCSession.isSupported)
     [self syncToWatch];
 }
 
@@ -172,7 +172,7 @@
                   [self.tableView
                       deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]
                             withRowAnimation:UITableViewRowAnimationAutomatic];
-                  [self.store del:indexPath.row];
+                  [self.store deleteTokenAtIndex:indexPath.row];
                   [self syncToWatch];
                   [self.tableView endUpdates];
                   [self.tableView reloadData];
@@ -199,28 +199,36 @@
   }
 }
 
-// SYNCING STUFF
-- (void)syncToWatch {
+
+- (void) ennsureWCSessionExists {
   if (!self.wcSession) {
-    NSLog(@"CREATING WCSESSION");
     self.wcSession = [WCSession defaultSession];
     self.wcSession.delegate = self;
     [self.wcSession activateSession];
   }
-
-  NSLog(@"Synncinng to watch");
-  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  // TODO: Err handling
-  [self.wcSession updateApplicationContext:[ud dictionaryRepresentation]
-                                     error:nil];
 }
+
+// SYNCING STUFF
+- (void)syncToWatch {
+  [self ennsureWCSessionExists];
+  
+  if (self.wcSession.isWatchAppInstalled && self.wcSession.isPaired) {
+    NSLog(@"Synncinng to watch");
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    // TODO: Err handling
+    [self.wcSession updateApplicationContext:[ud dictionaryRepresentation]
+                                       error:nil];
+  }
+}
+
 
 - (void)session:(WCSession *)session
     didReceiveMessage:(NSDictionary<NSString *, id> *)message {
-  NSLog(@"GOT MESSAGE %@", message);
-
-//  if ([[message valueForKey:@"payload"] isEqualToString:@"update"])
+    NSLog(@"GOT MESSAGE %@", message);
+  
+  if ([[message objectForKey:@"type"] isEqualToString:@"sync"]) {
     [self syncToWatch];
+  }
 }
 
 - (void)session:(nonnull WCSession *)session

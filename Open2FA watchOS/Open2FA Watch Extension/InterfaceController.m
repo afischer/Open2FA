@@ -21,40 +21,40 @@
 - (void)awakeWithContext:(id)context {
   [super awakeWithContext:context];
   if ([WCSession isSupported]) {
-    if ([self.wcSession activationState] == WCSessionActivationStateActivated) {
-      // TOOD: ERROR HANDLINGN
-      [self.wcSession sendMessage:@{@"payload" : @"update"}
-                     replyHandler:nil
-                     errorHandler:nil];
-    } else {
+    if ([self.wcSession activationState] != WCSessionActivationStateActivated) {
       self.wcSession = [WCSession defaultSession];
       self.wcSession.delegate = self;
       [self.wcSession activateSession];
     }
+    [self requestSync];
   }
   [self refreshTableView];
 }
 
-- (void)session:(WCSession *)session
-didReceiveApplicationContext:
-(NSDictionary<NSString *, id> *)applicationContext {
-  NSLog(@"GOT CONTEXT");
-  NSUserDefaults *store = [NSUserDefaults standardUserDefaults];
-  for (NSString *key in [applicationContext allKeys]) {
-    NSLog(@"KEY: %@", key);
-    [store setValue:[applicationContext objectForKey:key] forKey:key];
-  }
-  [store synchronize];
-  
-  
-  // Configure interface objects here.
+- (void)willActivate {
+  [super willActivate];
+  [self refreshTableView];
 }
 
-- (void)willActivate {
-  // This method is called when watch view controller is about to be visible to
-  // user
+- (void)didDeactivate {
+  // This method is called when watch view controller is no longer visible
+  [super didDeactivate];
+}
+
+- (void)session:(WCSession *)session didReceiveApplicationContext:
+  (NSDictionary<NSString *, id> *)applicationContext {
   
-  [super willActivate];
+  TokenStore *tstore = [[TokenStore alloc] init];
+  [tstore clear];
+
+  for (NSString *key in [applicationContext allKeys]) {
+    if ([key containsString:storePrefix]) {
+      NSURL *uri = [NSURL URLWithString:[applicationContext valueForKey:key]];
+      Token *token = [[Token alloc] initWithURI:uri];
+      [tstore add:token];
+    }
+  }
+  
   [self refreshTableView];
 }
 
@@ -64,7 +64,6 @@ didReceiveApplicationContext:
   for (NSInteger i = 0; i < self.table.numberOfRows; i++) {
     TokenWatchRow *row = [self.table rowControllerAtIndex:i];
     Token *token = [tstore get:(int)i];
-    NSLog(@"TOTOTOTOOTOTOTOTO %@", token.getOTP);
     [row setToken:token];
   }
 }
@@ -72,15 +71,15 @@ didReceiveApplicationContext:
 - (void)session:(nonnull WCSession *)session
     activationDidCompleteWithState:(WCSessionActivationState)activationState
                              error:(nullable NSError *)error {
-  NSLog(@"Finished activation");
-  [self.wcSession sendMessage:@{@"payload" : @"update"}
-                 replyHandler:nil
-                 errorHandler:nil];
+  [self requestSync];
 }
 
-- (void)didDeactivate {
-  // This method is called when watch view controller is no longer visible
-  [super didDeactivate];
+
+- (void)requestSync {
+  // TODO: Error handling
+  [self.wcSession sendMessage:@{@"type" : @"sync"}
+                 replyHandler:nil
+                 errorHandler:nil];
 }
 
 @end

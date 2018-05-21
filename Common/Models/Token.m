@@ -51,6 +51,8 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
 - (id)initWithURI:(NSURL *)uri {
   self = [super init];
   NSLog(@"INIT WITH URI: %@", uri);
+  if (!uri)
+    return nil;
   
   // set defaults, will be overwritten by query params if present
   self.period = 30;
@@ -238,7 +240,7 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
   return 0.0;
 }
 
-- (int)secondsLeft {
+- (float)secondsLeft {
   uint64_t now = currentTimeMillis();
   return (float)(tokenEnd - now) / 1000;
 }
