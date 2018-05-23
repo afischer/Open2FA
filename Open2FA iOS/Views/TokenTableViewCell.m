@@ -34,6 +34,7 @@
   self.accountLabel.text = tok.account;
   self.logoView.layer.cornerRadius = (CGFloat)self.logoView.bounds.size.width/2;
   self.logoView.clipsToBounds = YES;
+  self.logoView.image = tok.getImage;
 //  self.logoView.image = [UIImage imageNamed:@"DPLogo"];
 
   self.tokenText.font = [UIFont monospacedDigitSystemFontOfSize:30.0 weight:UIFontWeightSemibold];

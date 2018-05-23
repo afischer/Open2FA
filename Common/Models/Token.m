@@ -9,7 +9,6 @@
 //
 
 #import "Token.h"
-#import <sys/time.h>
 
 static uint64_t currentTimeMillis() {
   struct timeval t;
@@ -50,7 +49,7 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
 
 - (id)initWithURI:(NSURL *)uri {
   self = [super init];
-  NSLog(@"INIT WITH URI: %@", uri);
+  
   if (!uri)
     return nil;
   
@@ -128,17 +127,15 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
              Account:(NSString *)account
               Secret:(NSString *)secret {
   NSString *uri = [NSString stringWithFormat:@"otpauth://%@/%@:%@?&secret=%@",
-                                             method, [issuer urlEncodedString],
-                                             [account urlEncodedString], secret];
+                                             method, [issuer urlDecodedString],
+                                             [account urlDecodedString], secret];
 
   return [self initWithURI:[NSURL URLWithString:uri]];
 }
 
-- (NSString *)uid { // FIX THIS
-  NSString *uidStr =
-      [NSString stringWithFormat:@"%@%d:%@", storePrefix,
+- (NSString *)uid {
+  return [NSString stringWithFormat:@"%@%d:%@", storePrefix,
        (int)self.issuer, [self.account urlEncodedString]];
-  return [uidStr urlEncodedString];
 }
 
 - (NSString *)tokenURI {
@@ -147,11 +144,11 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
       stringWithFormat:@"otpauth://%@/"
                        @"%@:%@?algorithm=%s&digits=%lu&secret=%@&issuer=%@&"
                        @"period=%u",
-                       self.type, self.issuer, self.account,
+                       self.type, [self.issuer urlEncodedString], [self.account urlEncodedString],
                        unparseAlgo(self.algorithm), (unsigned long)self.digits,
-                       secretStr, self.issuer, self.period];
+                       secretStr, [self.issuer urlEncodedString], self.period];
   NSLog(@"GETTING URI %@", uri);
-  return [uri urlEncodedString];
+  return uri;
 }
 
 - (NSString *)getOTP {
@@ -226,6 +223,17 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
   currCode = [NSString stringWithFormat:@"%0*u", (int)self.digits, otp];
   
   return currCode;
+}
+
+- (UIImage *) getImage {
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+  NSString *path = [NSString stringWithFormat:@"%@/%@.png", basePath, self.uid];
+
+  if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+    return [UIImage imageWithContentsOfFile:path];;
+  }
+  return [UIImage imageNamed:@"DefaultLogo"];
 }
 
 - (float)progress {

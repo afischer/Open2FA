@@ -11,7 +11,9 @@
 #import "Base32.h"
 #import "NSString+Open2FA.h"
 
+#import <UIKit/UIKit.h>
 #import <CommonCrypto/CommonHMAC.h>
+#import <sys/time.h>
 
 extern NSString *const storePrefix;
 
@@ -35,4 +37,5 @@ extern NSString *const storePrefix;
              Account:(NSString *)account
               Secret:(NSString *)secret;
 - (NSString *)tokenURI;
+- (UIImage *) getImage;
 @end
