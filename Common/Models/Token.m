@@ -233,7 +233,7 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
   if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
     return [UIImage imageWithContentsOfFile:path];;
   }
-  return [UIImage imageNamed:@"DefaultLogo"];
+  return nil;
 }
 
 - (float)progress {

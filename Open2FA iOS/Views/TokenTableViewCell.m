@@ -8,7 +8,7 @@
 
 #import "TokenTableViewCell.h"
 #import "UIColor+Open2FA.h"
-
+#import "CDFInitialsAvatar.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation TokenTableViewCell {
@@ -34,9 +34,17 @@
   self.accountLabel.text = tok.account;
   self.logoView.layer.cornerRadius = (CGFloat)self.logoView.bounds.size.width/2;
   self.logoView.clipsToBounds = YES;
-  self.logoView.image = tok.getImage;
-//  self.logoView.image = [UIImage imageNamed:@"DPLogo"];
-
+  UIImage *img = tok.getImage;
+  if (img) {
+    self.logoView.image = tok.getImage;
+  } else {
+    CDFInitialsAvatar *avatar = [[CDFInitialsAvatar alloc] initWithRect: self.logoView.bounds fullName:tok.issuer];
+    [avatar setInitialsFont: [UIFont fontWithName:@"ArialRoundedMTBold"
+                                             size:18]];
+    // TODO: Save as image, this call is expennsive
+    [self.logoView setImage:avatar.imageRepresentation];
+  }
+  
   self.tokenText.font = [UIFont monospacedDigitSystemFontOfSize:30.0 weight:UIFontWeightSemibold];
   
   if ([tok.type isEqualToString:@"hotp"]) {

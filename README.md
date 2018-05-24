@@ -17,9 +17,11 @@ TKTKTK
 
 - [ekscrypto/Base32](https://github.com/ekscrypto/Base32) `Public Domain`: 
 Objective-C Base32 Additions for NSString and NSData
+- [totocaster/CDFInitialsAvatar](https://github.com/totocaster/CDFInitialsAvatar) `MIT`
+Simple to use initials avatar generator for iOS.
 
 
-### Referene Projects
+### Referenced Projects
 While not used explicitly, these projects were of great help creating this app.
 
 - [freeotp/freeotp-ios](https://github.com/freeotp/freeotp-ios)

@@ -28,7 +28,7 @@
   [self.tableView setDataSource:self];
   [self.tableView setAllowsMultipleSelectionDuringEditing:NO];
   [self.tableView setAllowsSelectionDuringEditing:YES];
-  //    self.navigationController.navigationBar.prefersLargeTitles = YES;
+  self.navigationController.navigationBar.prefersLargeTitles = YES;
   self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
   self.store = [[TokenStore alloc] init];
   if (WCSession.isSupported)

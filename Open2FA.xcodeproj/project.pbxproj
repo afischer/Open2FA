@@ -25,6 +25,7 @@
 		2EAF80232084FCB3006E889E /* NSString+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF80222084FCB3006E889E /* NSString+Open2FA.m */; };
 		2EAF8026208630A1006E889E /* UIColor+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8025208630A1006E889E /* UIColor+Open2FA.m */; };
 		2EAF802920864BBC006E889E /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF802820864BBC006E889E /* ScanViewController.m */; };
+		2EB7D84C20B7411A0008BD94 /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB7D84A20B741190008BD94 /* CDFInitialsAvatar.m */; };
 		2ECC46C72074027300C67388 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46C62074027300C67388 /* AppDelegate.m */; };
 		2ECC46CD2074027300C67388 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CB2074027300C67388 /* Main.storyboard */; };
 		2ECC46D22074027400C67388 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46D02074027400C67388 /* LaunchScreen.storyboard */; };
@@ -125,6 +126,8 @@
 		2EAF802820864BBC006E889E /* ScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		2EB7D84320B718270008BD94 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		2EB7D84420B718650008BD94 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2EB7D84A20B741190008BD94 /* CDFInitialsAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFInitialsAvatar.m; sourceTree = "<group>"; };
+		2EB7D84B20B7411A0008BD94 /* CDFInitialsAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFInitialsAvatar.h; sourceTree = "<group>"; };
 		2ECC46C22074027300C67388 /* Open2FA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Open2FA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECC46C52074027300C67388 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2ECC46C62074027300C67388 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -244,6 +247,15 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		2EB7D84920B741020008BD94 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				2EB7D84B20B7411A0008BD94 /* CDFInitialsAvatar.h */,
+				2EB7D84A20B741190008BD94 /* CDFInitialsAvatar.m */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		2ECC46B92074027300C67388 = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +323,7 @@
 				2EAF801E207FD444006E889E /* Base32.m */,
 				2EAF80202084FC66006E889E /* Categories */,
 				2EF6E79F2074225B001DB731 /* Models */,
+				2EB7D84920B741020008BD94 /* Objects */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -562,6 +575,7 @@
 				2ECC46C72074027300C67388 /* AppDelegate.m in Sources */,
 				2EF6E7A220742299001DB731 /* Token.m in Sources */,
 				2EAF8026208630A1006E889E /* UIColor+Open2FA.m in Sources */,
+				2EB7D84C20B7411A0008BD94 /* CDFInitialsAvatar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
