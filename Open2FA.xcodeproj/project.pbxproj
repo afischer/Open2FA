@@ -123,6 +123,8 @@
 		2EAF8025208630A1006E889E /* UIColor+Open2FA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Open2FA.m"; sourceTree = "<group>"; };
 		2EAF802720864BBC006E889E /* ScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		2EAF802820864BBC006E889E /* ScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
+		2EB7D84320B718270008BD94 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		2EB7D84420B718650008BD94 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2ECC46C22074027300C67388 /* Open2FA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Open2FA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECC46C52074027300C67388 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2ECC46C62074027300C67388 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -245,6 +247,8 @@
 		2ECC46B92074027300C67388 = {
 			isa = PBXGroup;
 			children = (
+				2EB7D84420B718650008BD94 /* README.md */,
+				2EB7D84320B718270008BD94 /* LICENSE.md */,
 				2EE3FD9820941CD6006F9D88 /* Common */,
 				2ECC46C42074027300C67388 /* Open2FA iOS */,
 				2EE5094920ACAEDA00234D35 /* Open2FA watchOS */,
