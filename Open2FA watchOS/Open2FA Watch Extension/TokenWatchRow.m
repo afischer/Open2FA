@@ -21,6 +21,7 @@
 
 
 
+
 - (void)setToken:(Token *)token {
   self.t = token;
   // NOT REALLY ACCURATE AS WE NEED TIME LEFT ON TOKEN SINCE LAST INTERVAL
@@ -29,6 +30,13 @@
                                                      selector:@selector(restart)
                                                      userInfo:nil
                                                       repeats:YES];
+  
+//  self.imageView.layer.cornerRadius = (CGFloat)self.logoView.bounds.size.width/2;
+//  self.logoView.clipsToBounds = YES;
+
+  
+  [self.imageView setImage:self.t.getImage];
+  
   [self setLabels];
 }
   

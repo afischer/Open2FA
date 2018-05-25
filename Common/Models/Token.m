@@ -9,6 +9,7 @@
 //
 
 #import "Token.h"
+#import "CDFInitialsAvatar.h"
 
 static uint64_t currentTimeMillis() {
   struct timeval t;
@@ -233,7 +234,21 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
   if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
     return [UIImage imageWithContentsOfFile:path];;
   }
-  return nil;
+  
+  CDFInitialsAvatar *avatar = [[CDFInitialsAvatar alloc]
+                               initWithRect:CGRectMake(0, 0, 75, 75)
+                                   fullName:self.issuer];
+  [avatar setInitialsFont: [UIFont fontWithName:@"ArialRoundedMTBold"
+                                           size:18]];
+ 
+  UIImage *avatarImg = avatar.imageRepresentation;
+  
+  NSData *imgData = UIImagePNGRepresentation(avatarImg);
+  NSString *imgName = [NSString stringWithFormat:@"%@.png", self.uid];
+  [imgData writeToFile:[basePath stringByAppendingPathComponent:imgName]
+            atomically:YES];
+
+  return avatarImg;
 }
 
 - (float)progress {

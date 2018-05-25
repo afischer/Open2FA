@@ -199,6 +199,10 @@
   }
 }
 
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+
+}
+
 
 - (void) ennsureWCSessionExists {
   if (!self.wcSession) {

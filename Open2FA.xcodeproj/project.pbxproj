@@ -26,6 +26,7 @@
 		2EAF8026208630A1006E889E /* UIColor+Open2FA.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF8025208630A1006E889E /* UIColor+Open2FA.m */; };
 		2EAF802920864BBC006E889E /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF802820864BBC006E889E /* ScanViewController.m */; };
 		2EB7D84C20B7411A0008BD94 /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB7D84A20B741190008BD94 /* CDFInitialsAvatar.m */; };
+		2EB7D84F20B787F50008BD94 /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB7D84A20B741190008BD94 /* CDFInitialsAvatar.m */; };
 		2ECC46C72074027300C67388 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46C62074027300C67388 /* AppDelegate.m */; };
 		2ECC46CD2074027300C67388 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CB2074027300C67388 /* Main.storyboard */; };
 		2ECC46D22074027400C67388 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46D02074027400C67388 /* LaunchScreen.storyboard */; };
@@ -551,6 +552,7 @@
 			files = (
 				2E08033D2090FE5400DF30E1 /* TokenWatchRow.m in Sources */,
 				2E08034120915B9E00DF30E1 /* Token.m in Sources */,
+				2EB7D84F20B787F50008BD94 /* CDFInitialsAvatar.m in Sources */,
 				2E08034020915B4100DF30E1 /* TokenStore.m in Sources */,
 				2EE3FD9920941CE5006F9D88 /* UIColor+Open2FA.m in Sources */,
 				2E08032B2090E40100DF30E1 /* ExtensionDelegate.m in Sources */,

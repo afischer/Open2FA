@@ -52,10 +52,12 @@
 
 - (UIImage *)imageRepresentation
 {
-    CGRect frame = self.frame;
+    CGRect frame = CGRectMake(0, 0, 45, 45);
     
     // General Declarations
-    UIGraphicsBeginImageContextWithOptions(frame.size, YES, [UIScreen mainScreen].scale);
+  
+    UIGraphicsBeginImageContextWithOptions(frame.size, YES, 0.0);
+  
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Color Declarations

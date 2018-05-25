@@ -19,40 +19,36 @@
                                 <tableRow identifier="tokenRow" id="cyJ-Vm-oSU" customClass="TokenWatchRow">
                                     <group key="rootItem" width="1" height="34" alignment="left" spacing="5" id="bcB-Zf-dow">
                                         <items>
-                                            <group width="0.25" alignment="left" verticalAlignment="center" id="E0G-iI-woX">
+                                            <group width="18" alignment="left" verticalAlignment="center" radius="9" id="E0G-iI-woX">
                                                 <items>
                                                     <imageView alignment="left" image="DefaultLogo" id="aX9-rY-amT"/>
                                                 </items>
                                             </group>
-                                            <group width="79" height="1" alignment="center" verticalAlignment="center" layout="vertical" spacing="0.0" id="N9Q-73-5Gp">
+                                            <group width="0.59999999999999998" height="1" alignment="center" verticalAlignment="center" layout="vertical" spacing="0.0" id="N9Q-73-5Gp">
                                                 <items>
                                                     <label width="1" height="14" alignment="left" verticalAlignment="center" text="123 123" minimumScaleFactor="0.5" id="HaR-W1-PGd">
                                                         <accessibilityTraits key="accessibilityTraits" updatesFrequently="YES"/>
                                                         <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                                     </label>
-                                                    <group width="1" alignment="center" verticalAlignment="center" spacing="0.0" id="BLm-kk-StJ">
-                                                        <items>
-                                                            <label alignment="left" verticalAlignment="center" text="E Corp" minimumScaleFactor="0.5" id="Hdz-J7-W5Y">
-                                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="font" type="system" pointSize="11"/>
-                                                            </label>
-                                                            <timer height="1" alignment="right" textAlignment="right" previewedSeconds="30" id="f9V-HZ-qEf">
-                                                                <fontDescription key="font" type="system" pointSize="11"/>
-                                                                <calendarUnit key="units" second="YES"/>
-                                                            </timer>
-                                                        </items>
-                                                    </group>
+                                                    <label alignment="left" verticalAlignment="center" text="E Corp" minimumScaleFactor="0.5" id="Hdz-J7-W5Y">
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="font" type="system" pointSize="11"/>
+                                                    </label>
                                                 </items>
                                             </group>
-                                            <group alignment="right" verticalAlignment="center" id="hC2-VL-fZ6">
+                                            <group width="0.25" alignment="right" verticalAlignment="center" id="hC2-VL-fZ6">
                                                 <items>
-                                                    <imageView height="1" alignment="left" image="Refresh" contentMode="scaleAspectFit" id="hqs-v2-TY7">
+                                                    <imageView width="18" height="1" alignment="left" hidden="YES" image="Refresh" contentMode="scaleAspectFit" id="hqs-v2-TY7">
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
+                                                    <timer height="1" alignment="right" textAlignment="right" previewedSeconds="30" id="f9V-HZ-qEf">
+                                                        <fontDescription key="font" type="system" pointSize="11"/>
+                                                        <calendarUnit key="units" second="YES"/>
+                                                    </timer>
                                                 </items>
                                             </group>
                                         </items>
-                                        <edgeInsets key="margins" left="10" right="10" top="3" bottom="3"/>
+                                        <edgeInsets key="margins" left="8" right="10" top="3" bottom="3"/>
                                     </group>
                                     <connections>
                                         <outlet property="imageView" destination="aX9-rY-amT" id="hS1-RP-OYU"/>
