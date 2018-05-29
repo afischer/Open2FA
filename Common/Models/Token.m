@@ -135,8 +135,8 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
 }
 
 - (NSString *)uid {
-  return [NSString stringWithFormat:@"%@%d:%@", storePrefix,
-       (int)self.issuer, [self.account urlEncodedString]];
+  return [NSString stringWithFormat:@"%@%@:%@", storePrefix,
+       [self.issuer urlEncodedString], [self.account urlEncodedString]];
 }
 
 - (NSString *)tokenURI {

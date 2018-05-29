@@ -8,9 +8,10 @@
 //  Thanks to Nathaniel McCallum <npmccallum@redhat.com> and OpenOTP
 //
 
-#define ORDER_KEY @"2FATokenOrder"
 
 #import "TokenStore.h"
+
+NSString *const ORDER_KEY = @"2FATokenOrder";
 
 static NSMutableArray *getOrder(NSUserDefaults *store) {
   NSMutableArray *order =
@@ -53,8 +54,8 @@ static NSMutableArray *getOrder(NSUserDefaults *store) {
   if (!token)
     return;
   
-  if ([store stringForKey:token.uid] != nil)
-    return;
+//  if ([store stringForKey:token.uid] != nil)
+//    return;
 
   NSMutableArray *order = getOrder(store);
   [order insertObject:token.uid atIndex:index];
@@ -70,7 +71,7 @@ static NSMutableArray *getOrder(NSUserDefaults *store) {
     return nil;
 
   NSString *key = [order objectAtIndex:(long)index];
-  if (key == nil)
+  if (key == nil || ![store objectForKey:key])
     return nil;
 
   NSLog(@"object for key %@: %@", key, [store objectForKey:key]);
@@ -98,6 +99,19 @@ static NSMutableArray *getOrder(NSUserDefaults *store) {
   if (index) {
     [self deleteTokenAtIndex:index];
   }
+}
+
+- (void) moveFrom:(NSUInteger)sourceIndex to:(NSUInteger)destinationIndex {
+  NSMutableArray* order = getOrder(store);
+  NSString* key = [order objectAtIndex:sourceIndex];
+  if (key == nil)
+    return;
+  
+  [order removeObjectAtIndex:sourceIndex];
+  [order insertObject:key atIndex:destinationIndex];
+  
+  [store setObject:order forKey:ORDER_KEY];
+  [store synchronize];
 }
 
 - (void)clear {

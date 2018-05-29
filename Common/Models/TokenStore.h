@@ -10,6 +10,8 @@
 
 #import "Token.h"
 
+extern NSString *const ORDER_KEY;
+
 @interface TokenStore : NSObject
 - (NSUInteger)count;
 - (void)add:(Token*)token;
@@ -17,5 +19,6 @@
 - (Token*)get:(NSUInteger)index;
 - (void)deleteTokenAtIndex:(NSUInteger)index;
 - (void)deleteToken:(Token *)token;
+- (void) moveFrom:(NSUInteger)sourceIndex to:(NSUInteger)destinationIndex;
 - (void)clear;
 @end
