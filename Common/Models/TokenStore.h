@@ -20,5 +20,6 @@ extern NSString *const ORDER_KEY;
 - (void)deleteTokenAtIndex:(NSUInteger)index;
 - (void)deleteToken:(Token *)token;
 - (void) moveFrom:(NSUInteger)sourceIndex to:(NSUInteger)destinationIndex;
+- (void) updateToken:(Token *)token;
 - (void)clear;
 @end

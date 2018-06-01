@@ -17,7 +17,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *accountLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *logoView;
 @property (strong, nonatomic) IBOutlet UIButton *refreshButton;
-
+@property (strong, nonatomic) Token *cellToken;
+@property (strong, nonatomic) IBOutlet UILabel *copiedLabel;
 - (void)setToken:(Token *)token;
 - (void)setProgressVisibility:(BOOL)visibile;
 @end

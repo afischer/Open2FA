@@ -36,8 +36,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  [self.tableView reloadData];
+  [self.navigationController.navigationBar setPrefersLargeTitles:YES];
   [super viewWillAppear:animated];
+  [self.tableView reloadData];
   if ([WCSession isSupported])
     [self syncToWatch];
 }
@@ -70,6 +71,7 @@
   // show controller modally
   UINavigationController *nc =
       [[UINavigationController alloc] initWithRootViewController:vc];
+  nc.navigationBar.tintColor = [UIColor colorNamed:@"tintColor"];
   nc.modalPresentationStyle = UIModalPresentationFormSheet;
   [self presentViewController:nc animated:YES completion:nil];
 }
@@ -81,7 +83,6 @@
       instantiateViewControllerWithIdentifier:@"manualEntryView"];
 
   vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissVC)];
-
   vc.didDismiss = ^() {
     [self.tableView reloadData];
   };
@@ -189,18 +190,45 @@
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   TokenTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
   if ([self.tableView isEditing]) {
-    NSLog(@"hi");
+    // TODO: Fix this
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AddViewController *addVC = (AddViewController *)[sb instantiateViewControllerWithIdentifier:@"manualEntryView"];
+    [self.navigationController.navigationBar setPrefersLargeTitles:NO];
+    addVC.editingToken = cell.cellToken;
+    [self.navigationController showViewController:addVC sender:self];
   } else {
     // copy token text to pasteboard
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = cell.tokenText.text;
     NSLog(@"COPIED %@ TO PASTEBOARD", cell.tokenText.text);
     [cell setSelected:NO];
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                       cell.copiedLabel.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished){
+                       [UIView animateWithDuration:0.4f
+                                             delay:2.0
+                                           options:UIViewAnimationOptionCurveEaseInOut
+                                        animations:^{
+                         cell.copiedLabel.alpha = 0.0;
+                       } completion:nil];
+                     }
+     
+     ];
+    
   }
 }
 
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-
+- (void)tableView:(UITableView *)tableView
+  moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+      toIndexPath:(NSIndexPath *)destinationIndexPath {
+  // This is a flat list soindex paths will only have one level
+  NSUInteger sourceIndex = [sourceIndexPath indexAtPosition:1];
+  NSUInteger destinationIndex = [destinationIndexPath indexAtPosition:1];
+  [self.store moveFrom:sourceIndex to:destinationIndex];
 }
 
 

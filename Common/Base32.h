@@ -14,6 +14,7 @@
 #import <Foundation/Foundation.h>
 
 #define NSBase32StringEncoding  0x4D467E32
+#define Base32AllowedChars "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567="
 
 @interface NSString (Base32)
 +(NSString *)stringFromBase32String:(NSString *)base32String;

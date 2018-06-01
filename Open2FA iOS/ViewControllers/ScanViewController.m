@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self requestCameraPermissionsIfNeeded];
-
+  [self.navigationController.navigationBar setTintColor:[UIColor colorNamed:@"tintColor"]];
   NSError *error;
 
   self.captureSession = [[AVCaptureSession alloc] init];

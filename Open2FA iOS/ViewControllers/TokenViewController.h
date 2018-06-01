@@ -11,5 +11,4 @@
 @interface TokenViewController : UITableViewController <UITableViewDelegate,
                                                         UITableViewDataSource>
 - (IBAction)addButtonClicked:(id)sender;
-
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "AddViewController.h"
-#import "Token.h"
 #import "TokenStore.h"
 
 @interface AddViewController ()
@@ -15,6 +14,16 @@
 @end
 
 @implementation AddViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+  self.navigationController.navigationBar.tintColor = [UIColor colorNamed:@"tintColor"];
+  if (self.editingToken) {
+    self.issuer.text = self.editingToken.issuer;
+    self.account.text = self.editingToken.account;
+    self.secret.text = @"••••••••••••";
+    [self.secret setEnabled:NO];
+  }
+}
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -25,6 +34,28 @@
   self.imgPicker.allowsEditing = YES;
   self.iconPreview.layer.cornerRadius = (CGFloat)self.iconPreview.bounds.size.width/2;
   self.iconPreview.clipsToBounds = YES;
+  [self.saveButton setEnabled:NO];
+  
+  [self.secret addTarget:self
+                  action:@selector(checkSecret)
+        forControlEvents:UIControlEventEditingChanged];
+}
+
+- (BOOL) checkSecret {
+  NSString *secretStr = self.secret.text;
+  UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath
+                                                                 indexPathForRow:2
+                                                                 inSection:1]];
+
+  if ([secretStr length] > 7) {
+    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    [self.saveButton setEnabled:YES];
+    return YES;
+  } else {
+    [self.saveButton setEnabled:NO];
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    return NO;
+  }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,8 +91,14 @@
   self.didDismiss();
 }
 
+
+//- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
+//  NSLog(@"%@", textField.)
+//}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ([indexPath indexAtPosition:0]) { // change icon
+  if ([indexPath indexAtPosition:0] == 2) { // change icon
     [self presentViewController:self.imgPicker animated:YES completion:nil];
   }
 }

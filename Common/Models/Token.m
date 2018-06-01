@@ -148,13 +148,16 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
                        self.type, [self.issuer urlEncodedString], [self.account urlEncodedString],
                        unparseAlgo(self.algorithm), (unsigned long)self.digits,
                        secretStr, [self.issuer urlEncodedString], self.period];
+  if ([self.type isEqualToString:@"hotp"]) {
+    uri = [NSString stringWithFormat:@"%@&counter=%llu", uri, self.counter];
+  }
   NSLog(@"GETTING URI %@", uri);
   return uri;
 }
 
 - (NSString *)getOTP {
   if ([self.type isEqualToString:@"hotp"]) {
-    return [self codeWithCount:self.counter++];
+    return [self codeWithCount:self.counter];
   } else {
     return [self getOTPForDate:[NSDate date]]; // totp for current time
   }

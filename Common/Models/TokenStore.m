@@ -101,6 +101,12 @@ static NSMutableArray *getOrder(NSUserDefaults *store) {
   }
 }
 
+- (void) updateToken:(Token *)token {
+  NSLog(@"UPDATING COUNTER TO BE %llu", [token counter]);
+  [store setObject:token.tokenURI forKey:token.uid];
+  [store synchronize];
+}
+
 - (void) moveFrom:(NSUInteger)sourceIndex to:(NSUInteger)destinationIndex {
   NSMutableArray* order = getOrder(store);
   NSString* key = [order objectAtIndex:sourceIndex];

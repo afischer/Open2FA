@@ -9,10 +9,9 @@
 #import "TokenTableViewCell.h"
 #import "UIColor+Open2FA.h"
 #import <QuartzCore/QuartzCore.h>
+#import "TokenStore.h"
 
-@implementation TokenTableViewCell {
-  Token *tok;
-}
+@implementation TokenTableViewCell
 - (void)awakeFromNib {
   [super awakeFromNib];
   // Initialization code
@@ -25,20 +24,20 @@
 }
 
 - (void)setToken:(Token *)token {
-  tok = token;
-  NSString *otp = [tok getOTP];
+  self.cellToken = token;
+  NSString *otp = [self.cellToken getOTP];
   NSLog(@"GETTING AN OTP: %@", otp);
   self.tokenText.text = otp;
-  self.issuerLabel.text = tok.issuer;
-  self.accountLabel.text = tok.account;
+  self.issuerLabel.text = self.cellToken.issuer;
+  self.accountLabel.text = self.cellToken.account;
   self.logoView.layer.cornerRadius = (CGFloat)self.logoView.bounds.size.width/2;
   self.logoView.clipsToBounds = YES;
   self.showsReorderControl = YES;
-  self.logoView.image = tok.getImage;
+  self.logoView.image = self.cellToken.getImage;
   
   self.tokenText.font = [UIFont monospacedDigitSystemFontOfSize:30.0 weight:UIFontWeightSemibold];
   
-  if ([tok.type isEqualToString:@"hotp"]) {
+  if ([self.cellToken.type isEqualToString:@"hotp"]) {
     self.refreshButton.hidden = NO;
     self.timeProgress.hidden = YES;
   } else {
@@ -52,7 +51,7 @@
 }
 
 - (void)updateProgress {
-  float tokenProgress = [tok progress];
+  float tokenProgress = [self.cellToken progress];
   BOOL restarted = tokenProgress == 0.0;
   [self.timeProgress setProgress:tokenProgress animated:tokenProgress < 0.01f];
   if (tokenProgress < 0.1f) {
@@ -60,7 +59,7 @@
   }
   if (restarted) {
     NSLog(@"New token!");
-    self.tokenText.text = tok.getOTP;
+    self.tokenText.text = self.cellToken.getOTP;
     [self.timeProgress setProgressTintColor:[UIColor tintColor]];
   }
 }
@@ -71,7 +70,12 @@
 
 - (IBAction)hotpDidRefresh:(id)sender {
   NSLog(@"new hotp");
-  self.tokenText.text = tok.getOTP;
+  // TODO: NEED TO RETAIN COUNTER
+  self.cellToken.counter += 1;
+  TokenStore *store = [[TokenStore alloc] init];
+  [store updateToken:self.cellToken];
+  self.tokenText.text = self.cellToken.getOTP;
+  
 }
 
 @end
