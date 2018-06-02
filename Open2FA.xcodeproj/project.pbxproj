@@ -96,6 +96,16 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2EE99B7020B842A400012C3C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -394,6 +404,7 @@
 				2ECC46BF2074027300C67388 /* Frameworks */,
 				2ECC46C02074027300C67388 /* Resources */,
 				2E0803392090E40200DF30E1 /* Embed Watch Content */,
+				2EE99B7020B842A400012C3C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -880,6 +891,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
 				INFOPLIST_FILE = Open2FATests/Info.plist;
@@ -890,6 +902,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.andrewfischer.Open2FATests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Open2FA.app/Open2FA";
 			};
@@ -899,6 +912,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VJ2YH44BQ3;
 				INFOPLIST_FILE = Open2FATests/Info.plist;
@@ -909,6 +923,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.andrewfischer.Open2FATests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Open2FA.app/Open2FA";
 			};

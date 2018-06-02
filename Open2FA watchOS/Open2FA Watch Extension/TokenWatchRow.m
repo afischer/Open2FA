@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *issuerLabel;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *tokenLabel;
 @property (weak, nonatomic) IBOutlet WKInterfaceTimer *timer;
-@property (weak, nonatomic) NSTimer *restartTimer;
+@property (strong, nonatomic) NSTimer *restartTimer;
 @property (strong, nonatomic) Token *t;
 @end
 
@@ -31,12 +31,7 @@
                                                      userInfo:nil
                                                       repeats:YES];
   
-//  self.imageView.layer.cornerRadius = (CGFloat)self.logoView.bounds.size.width/2;
-//  self.logoView.clipsToBounds = YES;
-
-  
   [self.imageView setImage:self.t.getImage];
-  
   [self setLabels];
 }
   

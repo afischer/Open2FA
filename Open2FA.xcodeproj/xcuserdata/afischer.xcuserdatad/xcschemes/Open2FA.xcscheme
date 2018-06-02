@@ -26,7 +26,32 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2ECC46C12074027300C67388"
+            BuildableName = "Open2FA.app"
+            BlueprintName = "Open2FA"
+            ReferencedContainer = "container:Open2FA.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2E0803142090E40000DF30E1"
+            BuildableName = "Open2FA Watch.app"
+            BlueprintName = "Open2FA Watch"
+            ReferencedContainer = "container:Open2FA.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2E0803202090E40100DF30E1"
+            BuildableName = "Open2FA Watch Extension.appex"
+            BlueprintName = "Open2FA Watch Extension"
+            ReferencedContainer = "container:Open2FA.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">

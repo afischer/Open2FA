@@ -26,11 +26,19 @@
   [super viewDidLoad];
   [self.tableView setDelegate:self];
   [self.tableView setDataSource:self];
+  
   [self.tableView setAllowsMultipleSelectionDuringEditing:NO];
   [self.tableView setAllowsSelectionDuringEditing:YES];
   self.navigationController.navigationBar.prefersLargeTitles = YES;
   self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
   self.store = [[TokenStore alloc] init];
+  
+  // present onboarding view if no tokens on launch
+//  if ([self tableView:self.tableView numberOfRowsInSection:0] == 0) {
+//    [self presentOnboardingView];
+//    return;
+//  }
+  
   if (WCSession.isSupported)
     [self syncToWatch];
 }
@@ -62,6 +70,18 @@
 - (IBAction)digitToggle:(id)sender {
 }
 
+- (void)presentOnboardingView {
+  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil] ;
+  
+  UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"onboardingView"];
+  // show controller modally
+  UINavigationController *nc =
+  [[UINavigationController alloc] initWithRootViewController:vc];
+  nc.navigationBar.hidden = YES;
+  nc.modalPresentationStyle = UIModalPresentationFormSheet;
+  [self presentViewController:nc animated:YES completion:nil];
+}
+
 - (void)presentScanView {
   UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil] ;
 
@@ -71,7 +91,6 @@
   // show controller modally
   UINavigationController *nc =
       [[UINavigationController alloc] initWithRootViewController:vc];
-  nc.navigationBar.tintColor = [UIColor colorNamed:@"tintColor"];
   nc.modalPresentationStyle = UIModalPresentationFormSheet;
   [self presentViewController:nc animated:YES completion:nil];
 }
@@ -102,7 +121,12 @@
 - (IBAction)editButtonnClicked:(id)sender {
   BOOL isEditing = [self.tableView isEditing];
   for (TokenTableViewCell *cell in self.tableView.visibleCells) {
-    [cell setProgressVisibility:isEditing];
+    if ([cell.cellToken.type isEqualToString:@"totp"]) {
+      [cell setProgressVisibility:isEditing];
+    } else {
+      // set refresh button visibility
+    }
+    
   }
   if (isEditing) {
     self.editButton.title = @"Edit";
@@ -190,7 +214,7 @@
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   TokenTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
   if ([self.tableView isEditing]) {
-    // TODO: Fix this
+    NSLog(@"Beginning editign");
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AddViewController *addVC = (AddViewController *)[sb instantiateViewControllerWithIdentifier:@"manualEntryView"];
     [self.navigationController.navigationBar setPrefersLargeTitles:NO];
@@ -200,7 +224,6 @@
     // copy token text to pasteboard
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = cell.tokenText.text;
-    NSLog(@"COPIED %@ TO PASTEBOARD", cell.tokenText.text);
     [cell setSelected:NO];
     [UIView animateWithDuration:0.2
                           delay:0.0
@@ -245,7 +268,6 @@
   [self ennsureWCSessionExists];
   
   if (self.wcSession.isWatchAppInstalled && self.wcSession.isPaired) {
-    NSLog(@"Synncinng to watch");
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     // TODO: Err handling
     [self.wcSession updateApplicationContext:[ud dictionaryRepresentation]

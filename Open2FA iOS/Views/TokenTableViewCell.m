@@ -12,15 +12,14 @@
 #import "TokenStore.h"
 
 @implementation TokenTableViewCell
-- (void)awakeFromNib {
+- (void)awakeFromNib { // Initialization code
   [super awakeFromNib];
-  // Initialization code
+  [self.timeProgress setProgressTintColor:[UIColor colorNamed:@"secondaryColor"]];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+- (void)setSelected:(BOOL)selected // Configure the view for the selected state
+           animated:(BOOL)animated {
   [super setSelected:selected animated:animated];
-
-  // Configure the view for the selected state
 }
 
 - (void)setToken:(Token *)token {
@@ -35,7 +34,9 @@
   self.showsReorderControl = YES;
   self.logoView.image = self.cellToken.getImage;
   
-  self.tokenText.font = [UIFont monospacedDigitSystemFontOfSize:30.0 weight:UIFontWeightSemibold];
+  UIFont *mono = [UIFont monospacedDigitSystemFontOfSize:30.0
+                                                  weight:UIFontWeightSemibold];
+  self.tokenText.font = mono;
   
   if ([self.cellToken.type isEqualToString:@"hotp"]) {
     self.refreshButton.hidden = NO;
@@ -47,7 +48,6 @@
                                    userInfo:nil
                                     repeats:YES];
   }
-  
 }
 
 - (void)updateProgress {
@@ -55,12 +55,12 @@
   BOOL restarted = tokenProgress == 0.0;
   [self.timeProgress setProgress:tokenProgress animated:tokenProgress < 0.01f];
   if (tokenProgress < 0.1f) {
-    [self.timeProgress setProgressTintColor:[UIColor warningColor]];
+    [self.timeProgress setProgressTintColor:[UIColor colorNamed:@"warningColor"]];
   }
   if (restarted) {
     NSLog(@"New token!");
     self.tokenText.text = self.cellToken.getOTP;
-    [self.timeProgress setProgressTintColor:[UIColor tintColor]];
+    [self.timeProgress setProgressTintColor:[UIColor colorNamed:@"secondaryColor"]];
   }
 }
 

@@ -51,9 +51,14 @@
     if ([key containsString:storePrefix]) {
       NSURL *uri = [NSURL URLWithString:[applicationContext valueForKey:key]];
       Token *token = [[Token alloc] initWithURI:uri];
-      [tstore add:token];
+      [tstore add:token atIndex:0];
     }
   }
+  
+  NSArray *order = [applicationContext objectForKey:ORDER_KEY];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setObject:order forKey:ORDER_KEY];
+  
   
   [self refreshTableView];
 }
@@ -64,7 +69,9 @@
   for (NSInteger i = 0; i < self.table.numberOfRows; i++) {
     TokenWatchRow *row = [self.table rowControllerAtIndex:i];
     Token *token = [tstore get:(int)i];
-    [row setToken:token];
+    if (token) {
+      [row setToken:token];
+    }
   }
 }
 
