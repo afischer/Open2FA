@@ -9,7 +9,6 @@
 #import "TokenTableViewCell.h"
 #import "UIColor+Open2FA.h"
 #import <QuartzCore/QuartzCore.h>
-#import "TokenStore.h"
 
 @implementation TokenTableViewCell
 - (void)awakeFromNib { // Initialization code
@@ -25,7 +24,6 @@
 - (void)setToken:(Token *)token {
   self.cellToken = token;
   NSString *otp = [self.cellToken getOTP];
-  NSLog(@"GETTING AN OTP: %@", otp);
   self.tokenText.text = otp;
   self.issuerLabel.text = self.cellToken.issuer;
   self.accountLabel.text = self.cellToken.account;
@@ -71,9 +69,6 @@
 - (IBAction)hotpDidRefresh:(id)sender {
   NSLog(@"new hotp");
   // TODO: NEED TO RETAIN COUNTER
-  self.cellToken.counter += 1;
-  TokenStore *store = [[TokenStore alloc] init];
-  [store updateToken:self.cellToken];
   self.tokenText.text = self.cellToken.getOTP;
   
 }

@@ -27,6 +27,7 @@
 		2EAF802920864BBC006E889E /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAF802820864BBC006E889E /* ScanViewController.m */; };
 		2EB7D84C20B7411A0008BD94 /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB7D84A20B741190008BD94 /* CDFInitialsAvatar.m */; };
 		2EB7D84F20B787F50008BD94 /* CDFInitialsAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB7D84A20B741190008BD94 /* CDFInitialsAvatar.m */; };
+		2EBF021420C30E73006F492F /* URITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF021320C30E73006F492F /* URITests.m */; };
 		2ECC46C72074027300C67388 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC46C62074027300C67388 /* AppDelegate.m */; };
 		2ECC46CD2074027300C67388 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46CB2074027300C67388 /* Main.storyboard */; };
 		2ECC46D22074027400C67388 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECC46D02074027400C67388 /* LaunchScreen.storyboard */; };
@@ -139,6 +140,7 @@
 		2EB7D84420B718650008BD94 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2EB7D84A20B741190008BD94 /* CDFInitialsAvatar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFInitialsAvatar.m; sourceTree = "<group>"; };
 		2EB7D84B20B7411A0008BD94 /* CDFInitialsAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFInitialsAvatar.h; sourceTree = "<group>"; };
+		2EBF021320C30E73006F492F /* URITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URITests.m; sourceTree = "<group>"; };
 		2ECC46C22074027300C67388 /* Open2FA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Open2FA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECC46C52074027300C67388 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2ECC46C62074027300C67388 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				2EE5094520AA17CE00234D35 /* HOTPTokenGenerationTests.m */,
 				2EE5094720AA186F00234D35 /* TOTPTokenGenerationTests.m */,
 				2E5C31852094B78C00C8B710 /* Base32Tests.m */,
+				2EBF021320C30E73006F492F /* URITests.m */,
 			);
 			path = Open2FATests;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EBF021420C30E73006F492F /* URITests.m in Sources */,
 				2EE5094820AA186F00234D35 /* TOTPTokenGenerationTests.m in Sources */,
 				2E5C31862094B78C00C8B710 /* Base32Tests.m in Sources */,
 				2EE5094620AA17CE00234D35 /* HOTPTokenGenerationTests.m in Sources */,

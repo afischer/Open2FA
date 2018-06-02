@@ -9,6 +9,7 @@
 //
 
 #import "Token.h"
+#import "TokenStore.h"
 #import "CDFInitialsAvatar.h"
 
 static uint64_t currentTimeMillis() {
@@ -71,7 +72,8 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
 
   // PATH PARSING
   NSString *path = [uri path];
-  if (!path)
+  NSLog(@"PATH IS %@", path);
+  if (!path || [path isEqualToString:@""])
     return nil;
   while ([path hasPrefix:@"/"])
     path = [path substringFromIndex:1];
@@ -112,8 +114,6 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
     } else if ([item.name isEqualToString:@"counter"]) {
       if ([self.type isEqualToString:@"hotp"])
         self.counter = [item.value longLongValue];
-    } else if ([item.name isEqualToString:@""]) {
-      
     }
   }
   // fail if no secret
@@ -157,7 +157,11 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
 
 - (NSString *)getOTP {
   if ([self.type isEqualToString:@"hotp"]) {
-    return [self codeWithCount:self.counter];
+    NSString *otp = [self codeWithCount:self.counter];
+    self.counter += 1;
+    TokenStore *store = [[TokenStore alloc] init];
+    [store updateToken:self];
+    return otp;
   } else {
     return [self getOTPForDate:[NSDate date]]; // totp for current time
   }
