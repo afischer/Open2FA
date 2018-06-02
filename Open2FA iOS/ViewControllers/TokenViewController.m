@@ -11,6 +11,7 @@
 #import "TokenTableViewCell.h"
 #import "ScanViewController.h"
 #import "AddViewController.h"
+#import "OnboardingViewController.h"
 #import <WatchConnectivity/WatchConnectivity.h>
 
 @interface TokenViewController () <WCSessionDelegate>
@@ -33,11 +34,11 @@
   self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
   self.store = [[TokenStore alloc] init];
   
-  // present onboarding view if no tokens on launch
-//  if ([self tableView:self.tableView numberOfRowsInSection:0] == 0) {
-//    [self presentOnboardingView];
-//    return;
-//  }
+//   present onboarding view if no tokens on launch
+  if ([self tableView:self.tableView numberOfRowsInSection:0] == 0) {
+    [self presentOnboardingView];
+    return;
+  }
   
   if (WCSession.isSupported)
     [self syncToWatch];
@@ -73,12 +74,15 @@
 - (void)presentOnboardingView {
   UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil] ;
   
-  UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"onboardingView"];
+  OnboardingViewController *vc = [sb instantiateViewControllerWithIdentifier:@"onboardingView"];
+  vc.didDismiss = ^() { [self addButtonClicked:nil]; };
+  
   // show controller modally
   UINavigationController *nc =
   [[UINavigationController alloc] initWithRootViewController:vc];
   nc.navigationBar.hidden = YES;
   nc.modalPresentationStyle = UIModalPresentationFormSheet;
+  
   [self presentViewController:nc animated:YES completion:nil];
 }
 
@@ -164,50 +168,44 @@
   return 75.0f;
 }
 
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView
+  leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  UIContextualAction *action = [UIContextualAction
+                                contextualActionWithStyle:UIContextualActionStyleNormal
+                                title:@"Copy Token"
+                                handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+                                  [self copyTokenAtIndexPath:indexPath];
+                                  completionHandler(YES);
+                                }];
+  
+  [action setBackgroundColor:[UIColor colorNamed:@"secondaryColor"]];
+//  action.image =
+  UISwipeActionsConfiguration *actionConfig = [UISwipeActionsConfiguration configurationWithActions: @[action]];
+  
+  return actionConfig;
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView
+  trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+  UIContextualAction *deleteAction = [UIContextualAction
+                                contextualActionWithStyle:UIContextualActionStyleDestructive
+                                title:@"Delete"
+                                handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+                                  [self deleteTokenAtIndexPath:indexPath];
+                                  completionHandler(NO);
+                                }];
+  [deleteAction setBackgroundColor:[UIColor redColor]];
+  UISwipeActionsConfiguration *actionConfig = [UISwipeActionsConfiguration configurationWithActions: @[deleteAction]];
+  actionConfig.performsFirstActionWithFullSwipe = NO;
+  return actionConfig;
+}
+
 // EDITING STUFF
 
 - (BOOL)tableView:(UITableView *)tableView
     canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   return YES;
-}
-
-- (void)tableView:(UITableView *)tableView
-    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-     forRowAtIndexPath:(NSIndexPath *)indexPath {
-  if (editingStyle == UITableViewCellEditingStyleDelete) {
-    UIAlertController *alert = [UIAlertController
-        alertControllerWithTitle:@"Delete 2FA Password"
-                         message:@"Are you sure you want to delete this item? "
-                                 @"This action can not be undone."
-                  preferredStyle:UIAlertControllerStyleAlert];
-
-    UIAlertAction *cancelBtn = [UIAlertAction
-        actionWithTitle:@"Cancel"
-                  style:UIAlertActionStyleCancel
-                handler:^(UIAlertAction *action) {
-                  [self dismissViewControllerAnimated:YES completion:nil];
-                }];
-
-    UIAlertAction *delBtn = [UIAlertAction
-        actionWithTitle:@"Delete"
-                  style:UIAlertActionStyleDestructive
-                handler:^(UIAlertAction *action) {
-                  // Annimate out, remove from store
-                  [self.tableView beginUpdates];
-                  [self.tableView
-                      deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]
-                            withRowAnimation:UITableViewRowAnimationAutomatic];
-                  [self.store deleteTokenAtIndex:indexPath.row];
-                  [self syncToWatch];
-                  [self.tableView endUpdates];
-                  [self.tableView reloadData];
-                }];
-
-    [alert addAction:cancelBtn];
-    [alert addAction:delBtn];
-
-    [self presentViewController:alert animated:YES completion:nil];
-  }
 }
 
 - (void)tableView:(UITableView *)tableView
@@ -221,28 +219,66 @@
     addVC.editingToken = cell.cellToken;
     [self.navigationController showViewController:addVC sender:self];
   } else {
-    // copy token text to pasteboard
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = cell.tokenText.text;
-    [cell setSelected:NO];
-    [UIView animateWithDuration:0.2
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-                       cell.copiedLabel.alpha = 1.0;
-                     }
-                     completion:^(BOOL finished){
-                       [UIView animateWithDuration:0.4f
-                                             delay:2.0
-                                           options:UIViewAnimationOptionCurveEaseInOut
-                                        animations:^{
-                         cell.copiedLabel.alpha = 0.0;
-                       } completion:nil];
-                     }
-     
-     ];
-    
+    [self copyTokenAtIndexPath:indexPath];
   }
+}
+
+- (void)copyTokenAtIndexPath:(NSIndexPath *)indexPath {
+  TokenTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+  // copy token text to pasteboard
+  UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+  pasteboard.string = cell.tokenText.text;
+  [cell setSelected:NO];
+  [UIView animateWithDuration:0.2
+                        delay:0.0
+                      options:UIViewAnimationOptionCurveEaseInOut
+                   animations:^{
+                     cell.copiedLabel.alpha = 1.0;
+                   }
+                   completion:^(BOOL finished){
+                     [UIView animateWithDuration:0.4f
+                                           delay:2.0
+                                         options:UIViewAnimationOptionCurveEaseInOut
+                                      animations:^{
+                                        cell.copiedLabel.alpha = 0.0;
+                                      } completion:nil];
+                   }
+   
+   ];
+}
+
+- (void)deleteTokenAtIndexPath:(NSIndexPath *)indexPath {
+  UIAlertController *alert = [UIAlertController
+                              alertControllerWithTitle:@"Delete 2FA Password"
+                              message:@"Are you sure you want to delete this item? "
+                              @"This action can not be undone."
+                              preferredStyle:UIAlertControllerStyleAlert];
+  
+  UIAlertAction *cancelBtn = [UIAlertAction
+                              actionWithTitle:@"Cancel"
+                              style:UIAlertActionStyleCancel
+                              handler:^(UIAlertAction *action) {
+                                [self dismissViewControllerAnimated:YES completion:nil];
+                              }];
+  
+  UIAlertAction *delBtn = [UIAlertAction
+                           actionWithTitle:@"Delete"
+                           style:UIAlertActionStyleDestructive
+                           handler:^(UIAlertAction *action) {
+                             // Annimate out, remove from store
+                             [self.tableView beginUpdates];
+                             [self.tableView
+                              deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+                             [self.store deleteTokenAtIndex:indexPath.row];
+                             [self syncToWatch];
+                             [self.tableView endUpdates];
+                             [self.tableView reloadData];
+                           }];
+  
+  [alert addAction:cancelBtn];
+  [alert addAction:delBtn];
+  [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)tableView:(UITableView *)tableView

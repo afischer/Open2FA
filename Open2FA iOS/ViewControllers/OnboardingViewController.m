@@ -9,7 +9,6 @@
 #import "OnboardingViewController.h"
 
 @interface OnboardingViewController ()
-
 @end
 
 @implementation OnboardingViewController
@@ -22,6 +21,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)didCompleteOnboarding:(id)sender {
+  [self dismissViewControllerAnimated:YES completion:nil];
+  self.didDismiss();
 }
 
 /*

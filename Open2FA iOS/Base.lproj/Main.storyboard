@@ -413,10 +413,10 @@
             </objects>
             <point key="canvasLocation" x="430" y="-247"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="JN1-Ud-hfx">
             <objects>
-                <viewController storyboardIdentifier="onboardingView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vs2-C8-i0X" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="onboardingView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vs2-C8-i0X" customClass="OnboardingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t3X-LU-iUf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -494,6 +494,9 @@
                                         <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didCompleteOnboarding:" destination="Vs2-C8-i0X" eventType="touchUpInside" id="SFl-eO-wlO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

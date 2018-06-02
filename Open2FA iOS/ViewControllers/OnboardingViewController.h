@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OnboardingViewController : UIViewController
-
+@property (nonatomic, copy) void (^didDismiss)(void);
 @end
