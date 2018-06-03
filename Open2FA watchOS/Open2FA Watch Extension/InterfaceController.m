@@ -20,6 +20,17 @@
 
 - (void)awakeWithContext:(id)context {
   [super awakeWithContext:context];
+  [self attemptWCSessionActivation];
+  [self refreshTableView];
+}
+
+- (void)willActivate {
+  [super willActivate];
+  [self attemptWCSessionActivation];
+  [self refreshTableView];
+}
+
+- (void)attemptWCSessionActivation {
   if ([WCSession isSupported]) {
     if ([self.wcSession activationState] != WCSessionActivationStateActivated) {
       self.wcSession = [WCSession defaultSession];
@@ -28,12 +39,6 @@
     }
     [self requestSync];
   }
-  [self refreshTableView];
-}
-
-- (void)willActivate {
-  [super willActivate];
-  [self refreshTableView];
 }
 
 - (void)didDeactivate {
@@ -85,8 +90,12 @@
 - (void)requestSync {
   // TODO: Error handling
   [self.wcSession sendMessage:@{@"type" : @"sync"}
-                 replyHandler:nil
-                 errorHandler:nil];
+                 replyHandler:^(NSDictionary<NSString *,id> * _Nonnull replyMessage) {
+                   NSLog(@"Reply?");
+                 } errorHandler:^(NSError * _Nonnull error) {
+                   NSLog(@"Encountered error on sync:");
+                   NSLog(@"%@", error);
+                 }];
 }
 
 @end

@@ -12,13 +12,6 @@
 #import "TokenStore.h"
 #import "CDFInitialsAvatar.h"
 
-static uint64_t currentTimeMillis() {
-  struct timeval t;
-  if (gettimeofday(&t, NULL) != 0)
-    return 0;
-  
-  return t.tv_sec * 1000 + t.tv_usec / 1000;
-}
 
 static inline const char *unparseAlgo(CCHmacAlgorithm algo) {
   switch (algo) {
@@ -182,7 +175,7 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
 
 
 - (NSString *)codeWithCount:(uint64_t)counter {
-  uint64_t now = currentTimeMillis();
+  uint64_t now = (long long)([[NSDate date] timeIntervalSince1970] * 1000.0);
   NSUInteger hashLength = 0;
   
   // mod table divisor
@@ -259,9 +252,9 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
 }
 
 - (float)progress {
-  uint64_t now = currentTimeMillis();
+  uint64_t now = (long long)([[NSDate date] timeIntervalSince1970] * 1000.0);
   
-  float timeRemaining = (float)(tokenEnd - now) / 1000 / self.period;
+  float timeRemaining = ((float)(tokenEnd - now) / 1000) / self.period;
   if (timeRemaining > 1) // need new token
     return 0.0;
   else
@@ -270,9 +263,9 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
   return 0.0;
 }
 
-- (float)secondsLeft {
-  uint64_t now = currentTimeMillis();
-  return (float)(tokenEnd - now) / 1000;
+// override for print debugging
+- (NSString *) description {
+  return [NSString stringWithFormat:@"%@ issuer: `%@` period: `%u`", [super description], self.issuer, self.period];
 }
 
 @end
