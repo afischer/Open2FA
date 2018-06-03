@@ -33,9 +33,9 @@ extern NSString *const storePrefix;
 - (float)progress;
 - (id)initWithURI:(NSURL *)uri;
 - (id)initWithType:(NSString *)method
-              Issuer:(NSString *)issuer
-             Account:(NSString *)account
-              Secret:(NSString *)secret;
+            Issuer:(NSString *)issuer
+            Account:(NSString *)account
+            Secret:(NSString *)secret;
 - (NSString *)tokenURI;
 - (UIImage *) getImage;
 @end
