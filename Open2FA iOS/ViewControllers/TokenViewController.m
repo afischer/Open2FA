@@ -180,7 +180,7 @@
                                 }];
   
   [action setBackgroundColor:[UIColor colorNamed:@"secondaryColor"]];
-//  action.image =
+  [action setImage:[UIImage imageNamed:@"Clipboard"]];
   UISwipeActionsConfiguration *actionConfig = [UISwipeActionsConfiguration configurationWithActions: @[action]];
   
   return actionConfig;
@@ -196,12 +196,12 @@
                                   completionHandler(NO);
                                 }];
   [deleteAction setBackgroundColor:[UIColor redColor]];
+  [deleteAction setImage:[UIImage imageNamed:@"Trash"]];
+
   UISwipeActionsConfiguration *actionConfig = [UISwipeActionsConfiguration configurationWithActions: @[deleteAction]];
   actionConfig.performsFirstActionWithFullSwipe = NO;
   return actionConfig;
 }
-
-// EDITING STUFF
 
 - (BOOL)tableView:(UITableView *)tableView
     canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -250,7 +250,7 @@
 - (void)deleteTokenAtIndexPath:(NSIndexPath *)indexPath {
   UIAlertController *alert = [UIAlertController
                               alertControllerWithTitle:@"Delete 2FA Password"
-                              message:@"Are you sure you want to delete this item? "
+                              message:@"Are you sure you want to delete this item?"
                               @"This action can not be undone."
                               preferredStyle:UIAlertControllerStyleAlert];
   

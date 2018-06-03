@@ -13,7 +13,7 @@
 @implementation TokenTableViewCell
 - (void)awakeFromNib { // Initialization code
   [super awakeFromNib];
-  [self.timeProgress setProgressTintColor:[UIColor colorNamed:@"secondaryColor"]];
+  [self.timeProgress setProgressTintColor:[UIColor colorNamed:@"greenColor"]];
 }
 
 - (void)setSelected:(BOOL)selected // Configure the view for the selected state
@@ -58,7 +58,7 @@
   if (restarted) {
     NSLog(@"New token!");
     self.tokenText.text = self.cellToken.getOTP;
-    [self.timeProgress setProgressTintColor:[UIColor colorNamed:@"secondaryColor"]];
+    [self.timeProgress setProgressTintColor:[UIColor colorNamed:@"greenColor"]];
   }
 }
 

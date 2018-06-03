@@ -124,7 +124,7 @@
 		2E08033C2090FE5400DF30E1 /* TokenWatchRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenWatchRow.m; sourceTree = "<group>"; };
 		2E5C31852094B78C00C8B710 /* Base32Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Base32Tests.m; sourceTree = "<group>"; };
 		2E8FFE8020769728004F1C7A /* TokenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenViewController.h; sourceTree = "<group>"; };
-		2E8FFE8120769728004F1C7A /* TokenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenViewController.m; sourceTree = "<group>"; };
+		2E8FFE8120769728004F1C7A /* TokenViewController.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = TokenViewController.m; sourceTree = "<group>"; tabWidth = 2; };
 		2EAF8013207D3496006E889E /* TokenStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenStore.h; sourceTree = "<group>"; };
 		2EAF8014207D3496006E889E /* TokenStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenStore.m; sourceTree = "<group>"; };
 		2EAF8017207D3BF8006E889E /* TokenTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenTableViewCell.h; sourceTree = "<group>"; };
