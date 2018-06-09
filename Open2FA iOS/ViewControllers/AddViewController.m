@@ -88,7 +88,7 @@
   
   [[[TokenStore alloc] init] add:token];
   [self dismissViewControllerAnimated:YES completion:nil];
-  self.didDismiss();
+  [self didDismiss];
 }
 
 
