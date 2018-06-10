@@ -65,7 +65,6 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
 
   // PATH PARSING
   NSString *path = [uri path];
-  NSLog(@"PATH IS %@", path);
   if (!path || [path isEqualToString:@""])
     return nil;
   while ([path hasPrefix:@"/"])
@@ -75,7 +74,6 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
 
   // get account, issuer if exists
   NSArray *pathComponents = [path componentsSeparatedByString:@":"];
-  NSLog(@"Path components %@", pathComponents);
   if (pathComponents == nil || [pathComponents count] == 0)
     return nil;
   if ([pathComponents count] > 1) {
@@ -144,7 +142,6 @@ NSString *const storePrefix = @"me.andrewfischer.Open2FA.token:";
   if ([self.type isEqualToString:@"hotp"]) {
     uri = [NSString stringWithFormat:@"%@&counter=%llu", uri, self.counter];
   }
-  NSLog(@"GETTING URI %@", uri);
   return uri;
 }
 

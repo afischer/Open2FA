@@ -212,7 +212,6 @@
     didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   TokenTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
   if ([self.tableView isEditing]) {
-    NSLog(@"Beginning editign");
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AddViewController *addVC = (AddViewController *)[sb instantiateViewControllerWithIdentifier:@"manualEntryView"];
     [self.navigationController.navigationBar setPrefersLargeTitles:NO];
@@ -314,8 +313,6 @@
 
 - (void)session:(WCSession *)session
     didReceiveMessage:(NSDictionary<NSString *, id> *)message {
-    NSLog(@"GOT MESSAGE %@", message);
-  
   if ([[message objectForKey:@"type"] isEqualToString:@"sync"]) {
     [self syncToWatch];
   }

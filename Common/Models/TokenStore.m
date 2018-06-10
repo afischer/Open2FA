@@ -66,18 +66,14 @@ static NSMutableArray *getOrder(NSUserDefaults *store) {
 
 - (Token *)get:(NSUInteger)index {
   NSMutableArray *order = getOrder(store);
-  NSLog(@"%@", order);
   if ([order count] < 1)
     return nil;
 
   NSString *key = [order objectAtIndex:(long)index];
   if (key == nil || ![store objectForKey:key])
     return nil;
-
-  NSLog(@"object for key %@: %@", key, [store objectForKey:key]);
   
   NSURL *tokenURI = [[NSURL alloc] initWithString:[store objectForKey:key]];
-
   return [[Token alloc] initWithURI:tokenURI];
 }
 

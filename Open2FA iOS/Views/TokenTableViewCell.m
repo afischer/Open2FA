@@ -22,7 +22,6 @@
 }
 
 - (void)setToken:(Token *)token {
-  NSLog(@"Setting token to %@", token);
   self.cellToken = token;
   NSString *otp = [self.cellToken getOTP];
   self.tokenText.text = otp;
@@ -51,8 +50,6 @@
 
 - (void)updateProgress {
   float tokenProgress = [self.cellToken progress];
-  NSLog(@"PROGRESS IN TABLE VIEW CELL IS %f", tokenProgress);
-
   BOOL restarted = tokenProgress == 0.0;
   [self.timeProgress setProgress:tokenProgress animated:tokenProgress < 0.01f];
   if (tokenProgress < 0.1f) {
